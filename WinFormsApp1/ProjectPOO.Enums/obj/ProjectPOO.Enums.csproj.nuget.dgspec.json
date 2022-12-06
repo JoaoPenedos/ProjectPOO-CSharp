@@ -1,6 +1,19 @@
 {
   "format": 1,
   "restore": {
+<<<<<<< HEAD
+    "C:\\Users\\bifes\\Desktop\\POO\\ProjectPOO\\WinFormsApp1\\ProjectPOO.Enums\\ProjectPOO.Enums.csproj": {}
+  },
+  "projects": {
+    "C:\\Users\\bifes\\Desktop\\POO\\ProjectPOO\\WinFormsApp1\\ProjectPOO.Enums\\ProjectPOO.Enums.csproj": {
+      "version": "1.0.0",
+      "restore": {
+        "projectUniqueName": "C:\\Users\\bifes\\Desktop\\POO\\ProjectPOO\\WinFormsApp1\\ProjectPOO.Enums\\ProjectPOO.Enums.csproj",
+        "projectName": "ProjectPOO.Enums",
+        "projectPath": "C:\\Users\\bifes\\Desktop\\POO\\ProjectPOO\\WinFormsApp1\\ProjectPOO.Enums\\ProjectPOO.Enums.csproj",
+        "packagesPath": "C:\\Users\\bifes\\.nuget\\packages\\",
+        "outputPath": "C:\\Users\\bifes\\Desktop\\POO\\ProjectPOO\\WinFormsApp1\\ProjectPOO.Enums\\obj\\",
+=======
     "C:\\Users\\joaop\\OneDrive\\Ambiente de Trabalho\\School Works\\POO\\ProjectPOO\\WinFormsApp1\\ProjectPOO.Enums\\ProjectPOO.Enums.csproj": {}
   },
   "projects": {
@@ -12,6 +25,7 @@
         "projectPath": "C:\\Users\\joaop\\OneDrive\\Ambiente de Trabalho\\School Works\\POO\\ProjectPOO\\WinFormsApp1\\ProjectPOO.Enums\\ProjectPOO.Enums.csproj",
         "packagesPath": "C:\\Users\\joaop\\.nuget\\packages\\",
         "outputPath": "C:\\Users\\joaop\\OneDrive\\Ambiente de Trabalho\\School Works\\POO\\ProjectPOO\\WinFormsApp1\\ProjectPOO.Enums\\obj\\",
+>>>>>>> 6396536312bb9bc7cfb248a640428392780affe9
         "projectStyle": "PackageReference",
         "configFilePaths": [
           "C:\\Users\\joaop\\AppData\\Roaming\\NuGet\\NuGet.Config",
