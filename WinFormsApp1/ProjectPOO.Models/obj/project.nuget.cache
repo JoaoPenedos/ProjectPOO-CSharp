@@ -1,8 +1,14 @@
 {
   "version": 2,
+<<<<<<< HEAD
   "dgSpecHash": "H8M0x0aC6eXjaAOr/2vkkpoqoTVI9n+zWywId9GrMsQ7WrwP2Y2tmJke3aCp3wsPJ5u4u+MH+MbV9bYw2Cpddw==",
   "success": true,
   "projectFilePath": "C:\\Users\\bifes\\Desktop\\POO\\ProjectPOO\\WinFormsApp1\\ProjectPOO.Models\\ProjectPOO.Models.csproj",
+=======
+  "dgSpecHash": "p39IYCbk/yiaEcMjWB+P9W0YVoynR5oR99t8Q/V7ARWSa5wj/hFKpzQOOK9DSUZNDC5/myQXY6MR4oZgV7JIQg==",
+  "success": true,
+  "projectFilePath": "C:\\Users\\joaop\\OneDrive\\Ambiente de Trabalho\\School Works\\POO\\ProjectPOO\\WinFormsApp1\\ProjectPOO.Models\\ProjectPOO.Models.csproj",
+>>>>>>> 6396536312bb9bc7cfb248a640428392780affe9
   "expectedPackageFiles": [],
   "logs": []
 }
