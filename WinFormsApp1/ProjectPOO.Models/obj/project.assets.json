@@ -14,11 +14,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\bifes\\Desktop\\POO\\PROJECT-POOOOOOOOO\\WinFormsApp1\\ProjectPOO.Models\\ProjectPOO.Models.csproj",
+      "projectUniqueName": "C:\\Users\\bifes\\Desktop\\POO\\ProjectPOO\\WinFormsApp1\\ProjectPOO.Models\\ProjectPOO.Models.csproj",
       "projectName": "ProjectPOO.Models",
-      "projectPath": "C:\\Users\\bifes\\Desktop\\POO\\PROJECT-POOOOOOOOO\\WinFormsApp1\\ProjectPOO.Models\\ProjectPOO.Models.csproj",
+      "projectPath": "C:\\Users\\bifes\\Desktop\\POO\\ProjectPOO\\WinFormsApp1\\ProjectPOO.Models\\ProjectPOO.Models.csproj",
       "packagesPath": "C:\\Users\\bifes\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\bifes\\Desktop\\POO\\PROJECT-POOOOOOOOO\\WinFormsApp1\\ProjectPOO.Models\\obj\\",
+      "outputPath": "C:\\Users\\bifes\\Desktop\\POO\\ProjectPOO\\WinFormsApp1\\ProjectPOO.Models\\obj\\",
       "projectStyle": "PackageReference",
       "fallbackFolders": [
         "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
