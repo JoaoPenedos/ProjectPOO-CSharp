@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace ProjectPOO.Models
 {
-    public class Veiculo
+    public class Veiculo    
     {
         public int VeiculoId { get; set; }
         public float Quilometragem { get; set; }  
