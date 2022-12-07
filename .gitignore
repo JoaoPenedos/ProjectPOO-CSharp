@@ -398,3 +398,11 @@ FodyWeavers.xsd
 
 # JetBrains Rider
 *.sln.iml
+/WinFormsApp1/ProjectPOO.Enums/obj/ProjectPOO.Enums.csproj.nuget.g.props
+/WinFormsApp1/ProjectPOO.Enums/obj/ProjectPOO.Enums.csproj.nuget.g.targets
+/WinFormsApp1/ProjectPOO.Exceptions/obj/ProjectPOO.Exceptions.csproj.nuget.g.props
+/WinFormsApp1/ProjectPOO.Exceptions/obj/ProjectPOO.Exceptions.csproj.nuget.g.targets
+/WinFormsApp1/ProjectPOO.Models/obj/ProjectPOO.Models.csproj.nuget.g.props
+/WinFormsApp1/ProjectPOO.Models/obj/ProjectPOO.Models.csproj.nuget.g.targets
+/WinFormsApp1/WinFormsApp1/obj/WinFormsApp1.csproj.nuget.g.targets
+/WinFormsApp1/WinFormsApp1/obj/WinFormsApp1.csproj.nuget.g.props
