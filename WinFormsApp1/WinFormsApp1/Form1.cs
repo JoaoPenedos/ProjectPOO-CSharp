@@ -2,8 +2,6 @@ namespace WinFormsApp1
 {
     public partial class Form1 : Form
     {
-        private DateTimePicker timePicker;
-
         public Form1()
         {
             InitializeComponent();
@@ -38,6 +36,8 @@ namespace WinFormsApp1
         {
             this.toolStripMenuLogin.Visible = false;
             this.toolStripMenuLogout.Visible = false;
+
+            this.toolStripStatusLabel1.Visible = false;
             //bool existeUser = AutSys.isUserLogged();
 
             //this.adicionarJogoToolStripMenuItem.Enabled = false;
@@ -54,6 +54,29 @@ namespace WinFormsApp1
             //        this.adicionarJogoToolStripMenuItem.Enabled = true;
             //    }
             //}
+        }
+
+        private void ButtonProcurarReserva_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void DataGridViewSoftware_CellClick(object sender, DataGridViewCellEventArgs e)
+        {
+            //Tratar o evento de click nos butoes da tabela
+            if ((e.RowIndex >= 0) && (e.ColumnIndex == dataGridViewReserva.Columns["ButtonReserva"].Index))
+            {
+                //Get informação acerca da reserva escolhida
+
+                //MessageBox para confirmar ou não a reserva do veiculo
+                DialogResult escolhaDoUtilizador = MessageBox.Show("Está prestes a confirmar a reserva deste veiculo.", "Atenção...", MessageBoxButtons.OKCancel, MessageBoxIcon.Information);
+                
+                //Se a escolha for OK na message box reservar o veiculo escolhido
+                if (escolhaDoUtilizador == DialogResult.OK)
+                {
+                    // Reservar Veiculo escolhido
+                }
+            }
         }
     }
 }

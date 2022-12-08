@@ -6,4 +6,8 @@
     <Nullable>enable</Nullable>
   </PropertyGroup>
 
+  <ItemGroup>
+    <ProjectReference Include="..\ProjectPOO.Enums\ProjectPOO.Enums.csproj" />
+  </ItemGroup>
+
 </Project>

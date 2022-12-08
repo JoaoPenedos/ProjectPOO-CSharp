@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace ProjectPOO.Models
 {
-    public class Pessoa
+    public abstract class Pessoa
     {
         public Pessoa(string email, string nome, int numeroTelemovel)
         {

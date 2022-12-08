@@ -8,10 +8,12 @@ namespace ProjectPOO.Models
 {
     public class Funcionario : Pessoa
     {
-        public Funcionario(string email, string nome, int numeroTelemovel, int funcionarioID)
+        private readonly int lastFuncionarioID = -1;
+
+        public Funcionario(string email, string nome, int numeroTelemovel)
              : base(email, nome, numeroTelemovel)
         {
-            this.FuncionarioID = funcionarioID;
+            this.FuncionarioID = lastFuncionarioID + 1;
         }
 
         public int FuncionarioID { get; set; }
