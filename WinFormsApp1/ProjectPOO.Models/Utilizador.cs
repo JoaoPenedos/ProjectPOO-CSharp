@@ -11,6 +11,7 @@ namespace ProjectPOO.Models
         public Utilizador(string email, string nome, int numeroTelemovel, DateTime dataNascimento, string Morada)
              : base(email,nome,numeroTelemovel)
         {
+            this.Email= email;
             this.DataNascimento = dataNascimento;
             this.Morada = Morada;
         }

@@ -26,4 +26,8 @@ namespace ProjectPOO.Enums
         Pago, NaoPago
     }
 
+    public enum TipoVeiculo
+    {
+        Bicicleta, Trotinete
+    }
 }

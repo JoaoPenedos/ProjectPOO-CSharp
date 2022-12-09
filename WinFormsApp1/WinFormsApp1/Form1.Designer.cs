@@ -44,9 +44,6 @@
             this.dateTimePickerReservaDate = new System.Windows.Forms.DateTimePicker();
             this.buttonProcurarReserva = new System.Windows.Forms.Button();
             this.dataGridViewReserva = new System.Windows.Forms.DataGridView();
-            this.NVeiculo = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.PreçoMinuto = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.PreçoReserva = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.ButtonReserva = new System.Windows.Forms.DataGridViewButtonColumn();
             this.menuStrip1.SuspendLayout();
             this.statusStrip1.SuspendLayout();
@@ -119,9 +116,9 @@
             // pictureBoxBicicleta
             // 
             this.pictureBoxBicicleta.Image = global::WinFormsApp1.Properties.Resources._2533224;
-            this.pictureBoxBicicleta.Location = new System.Drawing.Point(57, 60);
+            this.pictureBoxBicicleta.Location = new System.Drawing.Point(20, 60);
             this.pictureBoxBicicleta.Name = "pictureBoxBicicleta";
-            this.pictureBoxBicicleta.Size = new System.Drawing.Size(135, 134);
+            this.pictureBoxBicicleta.Size = new System.Drawing.Size(120, 118);
             this.pictureBoxBicicleta.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
             this.pictureBoxBicicleta.TabIndex = 5;
             this.pictureBoxBicicleta.TabStop = false;
@@ -129,9 +126,9 @@
             // pictureBoxTrotinete
             // 
             this.pictureBoxTrotinete.Image = global::WinFormsApp1.Properties.Resources.istockphoto_1318443231_612x612_removebg_preview;
-            this.pictureBoxTrotinete.Location = new System.Drawing.Point(224, 60);
+            this.pictureBoxTrotinete.Location = new System.Drawing.Point(169, 60);
             this.pictureBoxTrotinete.Name = "pictureBoxTrotinete";
-            this.pictureBoxTrotinete.Size = new System.Drawing.Size(135, 134);
+            this.pictureBoxTrotinete.Size = new System.Drawing.Size(120, 118);
             this.pictureBoxTrotinete.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
             this.pictureBoxTrotinete.TabIndex = 6;
             this.pictureBoxTrotinete.TabStop = false;
@@ -139,7 +136,7 @@
             // checkBoxBicicleta
             // 
             this.checkBoxBicicleta.AutoSize = true;
-            this.checkBoxBicicleta.Location = new System.Drawing.Point(80, 200);
+            this.checkBoxBicicleta.Location = new System.Drawing.Point(36, 184);
             this.checkBoxBicicleta.Name = "checkBoxBicicleta";
             this.checkBoxBicicleta.Size = new System.Drawing.Size(87, 24);
             this.checkBoxBicicleta.TabIndex = 7;
@@ -149,7 +146,7 @@
             // checkBoxTrotinete
             // 
             this.checkBoxTrotinete.AutoSize = true;
-            this.checkBoxTrotinete.Location = new System.Drawing.Point(247, 200);
+            this.checkBoxTrotinete.Location = new System.Drawing.Point(184, 184);
             this.checkBoxTrotinete.Name = "checkBoxTrotinete";
             this.checkBoxTrotinete.Size = new System.Drawing.Size(90, 24);
             this.checkBoxTrotinete.TabIndex = 8;
@@ -159,9 +156,9 @@
             // comboBoxPosto
             // 
             this.comboBoxPosto.FormattingEnabled = true;
-            this.comboBoxPosto.Location = new System.Drawing.Point(57, 256);
+            this.comboBoxPosto.Location = new System.Drawing.Point(20, 243);
             this.comboBoxPosto.Name = "comboBoxPosto";
-            this.comboBoxPosto.Size = new System.Drawing.Size(302, 28);
+            this.comboBoxPosto.Size = new System.Drawing.Size(269, 28);
             this.comboBoxPosto.TabIndex = 9;
             this.comboBoxPosto.Text = "--Escolha o Posto --";
             // 
@@ -169,22 +166,22 @@
             // 
             this.dateTimePickerReservaTime.CustomFormat = "";
             this.dateTimePickerReservaTime.Format = System.Windows.Forms.DateTimePickerFormat.Time;
-            this.dateTimePickerReservaTime.Location = new System.Drawing.Point(57, 359);
+            this.dateTimePickerReservaTime.Location = new System.Drawing.Point(20, 345);
             this.dateTimePickerReservaTime.Name = "dateTimePickerReservaTime";
             this.dateTimePickerReservaTime.ShowUpDown = true;
-            this.dateTimePickerReservaTime.Size = new System.Drawing.Size(302, 27);
+            this.dateTimePickerReservaTime.Size = new System.Drawing.Size(269, 27);
             this.dateTimePickerReservaTime.TabIndex = 10;
             // 
             // dateTimePickerReservaDate
             // 
-            this.dateTimePickerReservaDate.Location = new System.Drawing.Point(57, 308);
+            this.dateTimePickerReservaDate.Location = new System.Drawing.Point(20, 294);
             this.dateTimePickerReservaDate.Name = "dateTimePickerReservaDate";
-            this.dateTimePickerReservaDate.Size = new System.Drawing.Size(302, 27);
+            this.dateTimePickerReservaDate.Size = new System.Drawing.Size(269, 27);
             this.dateTimePickerReservaDate.TabIndex = 11;
             // 
             // buttonProcurarReserva
             // 
-            this.buttonProcurarReserva.Location = new System.Drawing.Point(57, 411);
+            this.buttonProcurarReserva.Location = new System.Drawing.Point(103, 404);
             this.buttonProcurarReserva.Name = "buttonProcurarReserva";
             this.buttonProcurarReserva.Size = new System.Drawing.Size(94, 29);
             this.buttonProcurarReserva.TabIndex = 12;
@@ -194,50 +191,26 @@
             // 
             // dataGridViewReserva
             // 
+            this.dataGridViewReserva.AllowUserToAddRows = false;
             this.dataGridViewReserva.AllowUserToDeleteRows = false;
             this.dataGridViewReserva.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dataGridViewReserva.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
-            this.NVeiculo,
-            this.PreçoMinuto,
-            this.PreçoReserva,
             this.ButtonReserva});
-            this.dataGridViewReserva.Location = new System.Drawing.Point(497, 60);
+            this.dataGridViewReserva.Location = new System.Drawing.Point(310, 60);
             this.dataGridViewReserva.Name = "dataGridViewReserva";
-            this.dataGridViewReserva.RowHeadersWidth = 51;
-            this.dataGridViewReserva.RowTemplate.Height = 29;
-            this.dataGridViewReserva.Size = new System.Drawing.Size(560, 442);
-            this.dataGridViewReserva.TabIndex = 13;
+            this.dataGridViewReserva.ReadOnly = true;
+            this.dataGridViewReserva.RowHeadersWidth = 50;
+            this.dataGridViewReserva.RowTemplate.Height = 28;
+            this.dataGridViewReserva.Size = new System.Drawing.Size(786, 442);
+            this.dataGridViewReserva.TabIndex = 12;
             this.dataGridViewReserva.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.DataGridViewSoftware_CellClick);
-            // 
-            // NVeiculo
-            // 
-            this.NVeiculo.HeaderText = "Nº Veiculo";
-            this.NVeiculo.MinimumWidth = 6;
-            this.NVeiculo.Name = "NVeiculo";
-            this.NVeiculo.Resizable = System.Windows.Forms.DataGridViewTriState.False;
-            this.NVeiculo.Width = 125;
-            // 
-            // PreçoMinuto
-            // 
-            this.PreçoMinuto.HeaderText = "Preço/Minuto";
-            this.PreçoMinuto.MinimumWidth = 6;
-            this.PreçoMinuto.Name = "PreçoMinuto";
-            this.PreçoMinuto.Resizable = System.Windows.Forms.DataGridViewTriState.False;
-            this.PreçoMinuto.Width = 125;
-            // 
-            // PreçoReserva
-            // 
-            this.PreçoReserva.HeaderText = "Preço Reserva";
-            this.PreçoReserva.MinimumWidth = 6;
-            this.PreçoReserva.Name = "PreçoReserva";
-            this.PreçoReserva.Resizable = System.Windows.Forms.DataGridViewTriState.False;
-            this.PreçoReserva.Width = 125;
             // 
             // ButtonReserva
             // 
             this.ButtonReserva.HeaderText = "Reservar";
             this.ButtonReserva.MinimumWidth = 6;
             this.ButtonReserva.Name = "ButtonReserva";
+            this.ButtonReserva.ReadOnly = true;
             this.ButtonReserva.Resizable = System.Windows.Forms.DataGridViewTriState.False;
             this.ButtonReserva.Text = "Reservar";
             this.ButtonReserva.UseColumnTextForButtonValue = true;
@@ -293,9 +266,6 @@
         private DateTimePicker dateTimePickerReservaDate;
         private Button buttonProcurarReserva;
         private DataGridView dataGridViewReserva;
-        private DataGridViewTextBoxColumn NVeiculo;
-        private DataGridViewTextBoxColumn PreçoMinuto;
-        private DataGridViewTextBoxColumn PreçoReserva;
         private DataGridViewButtonColumn ButtonReserva;
     }
 }

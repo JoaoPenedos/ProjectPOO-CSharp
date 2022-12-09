@@ -1,7 +1,17 @@
+using ProjectPOO.Data;
+using ProjectPOO.Models;
+using System.Collections.Generic;
+using System.ComponentModel;
+using System;
+
 namespace WinFormsApp1
 {
     public partial class Form1 : Form
     {
+        Veiculos veiculos = new Veiculos();
+        BindingList<IVeiculo> bindingList;
+        BindingSource bs;
+
         public Form1()
         {
             InitializeComponent();
@@ -30,6 +40,12 @@ namespace WinFormsApp1
         private void Form1_Load(object sender, EventArgs e)
         {
             this.BootForm();
+
+            bindingList = new BindingList<IVeiculo>(veiculos.ListVeiculos());
+            bs = new BindingSource(bindingList, null);
+            this.dataGridViewReserva.DataSource = bs;
+            this.dataGridViewReserva.Columns["EstadoVeiculo"].Visible = false;
+            this.dataGridViewReserva.Columns["Kilometros"].Visible = false;
         }
 
         private void BootForm()
@@ -70,8 +86,19 @@ namespace WinFormsApp1
 
                 //MessageBox para confirmar ou não a reserva do veiculo
                 DialogResult escolhaDoUtilizador = MessageBox.Show("Está prestes a confirmar a reserva deste veiculo.", "Atenção...", MessageBoxButtons.OKCancel, MessageBoxIcon.Information);
-                
-                //Se a escolha for OK na message box reservar o veiculo escolhido
+
+
+
+
+                //////// IMPORTANTE
+                veiculos.AddVeiculo(new Trotinete("BoltT2", 0.30, 0.95, 14));
+                bs.ResetBindings(true);
+                //////// IMPORTANTE
+
+
+
+
+                //Se a escolha for OK na message box, reservar o veiculo escolhido
                 if (escolhaDoUtilizador == DialogResult.OK)
                 {
                     // Reservar Veiculo escolhido

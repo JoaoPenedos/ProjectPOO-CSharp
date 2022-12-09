@@ -1,32 +1,58 @@
 ﻿using ProjectPOO.Enums;
 using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
 namespace ProjectPOO.Models
 {
-    public class Bicicleta : Veiculo
+    public class Bicicleta : IVeiculo
     {
-        private readonly int lastBicicletaID = -1;
-
         public Bicicleta(string modelo, double custoMinuto, double custoReserva, EstadoVeiculo estadoVeiculo, int kilometros = 0)
-            : base(modelo, custoMinuto, custoReserva, estadoVeiculo, kilometros)
         {
-            this.BicicletaID = lastBicicletaID + 1;
+            this.Modelo = modelo;
+            this.CustoMinuto = custoMinuto;
+            this.CustoReserva = custoReserva;
+            this.EstadoVeiculo = estadoVeiculo;
+            this.Kilometros = kilometros;
+            this.TipoVeiculo = TipoVeiculo.Bicicleta;
         }
 
-        public Bicicleta(string modelo, double custoMinuto, double custoReserva, int kilometros = 0) 
-            : base(modelo, custoMinuto, custoReserva, kilometros)
+        public Bicicleta(string modelo, double custoMinuto, double custoReserva, int kilometros = 0)
         {
-            this.BicicletaID = lastBicicletaID + 1;
+            this.Modelo = modelo;
+            this.CustoMinuto = custoMinuto;
+            this.CustoReserva = custoReserva;
+            this.Kilometros = kilometros;
+            this.EstadoVeiculo = EstadoVeiculo.Ativo;
+            this.TipoVeiculo = TipoVeiculo.Bicicleta;
         }
 
-        public int BicicletaID { get; set; }
+        [Browsable(false)]
+        public uint Id { get; set; }
 
-        public override void UpdateKilometros(int newKilometrosTraveled) => this.Kilometros += newKilometrosTraveled;
+        public string Designacao { get; set; }
 
-        public override void UpdateEstadoVeiculo(EstadoVeiculo estadoVeiculo) => this.EstadoVeiculo = estadoVeiculo;
+        public string Modelo { get; set; }
+
+        public double CustoMinuto { get; set; }
+
+        public double CustoReserva { get; set; }
+
+        public EstadoVeiculo EstadoVeiculo { get; set; }
+
+        public int Kilometros { get; set; }
+
+        public TipoVeiculo TipoVeiculo { get; set; }
+
+
+
+        public void UpdateKilometros(int newKilometrosTraveled) => this.Kilometros += newKilometrosTraveled;
+
+        public void UpdateEstadoVeiculo(EstadoVeiculo estadoVeiculo) => this.EstadoVeiculo = estadoVeiculo;
+
+        public void SetDesignacao() => this.Designacao = "Bicicleta_N" + this.Id.ToString("00");
     }
 }
