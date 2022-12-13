@@ -10,7 +10,6 @@ namespace ProjectPOO.Models
 {
     public class Reserva
     {
-
         public Reserva(DateTime dataReserva, uint utilizadorId,/* uint postoId, */uint veiculoId) 
         {
             this.DataReserva = dataReserva;

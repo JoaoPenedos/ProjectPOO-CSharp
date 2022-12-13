@@ -53,6 +53,6 @@ namespace ProjectPOO.Models
 
         public void UpdateEstadoVeiculo(EstadoVeiculo estadoVeiculo) => this.EstadoVeiculo = estadoVeiculo;
 
-        public void SetDesignacao() => this.Designacao = "Trotinete_N" + this.Id.ToString("00");
+        public void SetDesignacao(uint lastTrotineteID) => this.Designacao = "Trotinete_N" + lastTrotineteID.ToString("00");
     }
 }

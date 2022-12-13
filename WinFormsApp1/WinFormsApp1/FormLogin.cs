@@ -40,7 +40,7 @@ namespace WinFormsApp1
             if (textBoxUtilizador.Text != null && textBoxUtilizador.Text.Trim() != string.Empty
                 && textBoxPassword.Text != null && textBoxPassword.Text.Trim() != string.Empty)
             {
-                if (Utilizadores.IsAutenticacaoValida(this.textBoxUtilizador.Text.Trim().ToLower(), this.textBoxPassword.Text.Trim().ToLower()))
+                if (Utilizadores.IsAutenticacaoValida(this.textBoxUtilizador.Text.Trim(), this.textBoxPassword.Text.Trim()))
                     this.Close();
                 else
                     MessageBox.Show("Autenticação inválida.", "Atenção...", MessageBoxButtons.OK, MessageBoxIcon.Warning);

@@ -20,8 +20,13 @@ namespace ProjectPOO.Data
 
         public Reservas(bool inicializeDummyData)
         {
-            this.AddReserva(new Reserva(DateTime.Now, 1, 2));
-            this.AddReserva(new Reserva(DateTime.Now, 1, 3));
+            this.AddReserva(new Reserva(DateTime.Now, 2, 3));
+            this.AddReserva(new Reserva(DateTime.Now, 2, 2));
+            this.AddReserva(new Reserva(DateTime.Now, 1, 1));
+            this.AddReserva(new Reserva(DateTime.Now, 3, 6));
+            this.AddReserva(new Reserva(DateTime.Now, 1, 5));
+            this.AddReserva(new Reserva(DateTime.Now, 4, 9));
+            this.AddReserva(new Reserva(DateTime.Now, 4, 7));
         }
 
         public void AddReserva(Reserva novaReserva)

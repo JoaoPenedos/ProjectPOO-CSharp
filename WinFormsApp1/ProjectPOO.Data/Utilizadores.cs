@@ -21,9 +21,10 @@ namespace ProjectPOO.Data
 
         public Utilizadores(bool inicializeDummyData)
         {
-            this.AddUtilizador(new Utilizador("manuelAntonio@gmail.com", "manuel", "manuel", 935462613, DateTime.Now, "Alvelos" ));
+            this.AddUtilizador(new Utilizador("manuelAntonio@gmail.com", "Manuel", "maNuel", 935462613, DateTime.Now, "Alvelos" ));
             this.AddUtilizador(new Utilizador("ToneMaria@gmail.com", "tone", "tone", 945646513, DateTime.Now, "Brasiu" ));
             this.AddUtilizador(new Utilizador("Manuela@gmail.com", "manuela", "prima", 945678977, DateTime.Now, "Alvelinhos" ));
+            this.AddUtilizador(new Utilizador("Emanuel@outlook.com", "Emanuel", "José", 123456789, DateTime.Now, "Mexico" ));
         }
 
         //methods

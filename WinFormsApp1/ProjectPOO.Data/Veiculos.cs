@@ -4,6 +4,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 
 namespace ProjectPOO.Data
@@ -11,6 +12,7 @@ namespace ProjectPOO.Data
     public class Veiculos
     {
         List<IVeiculo> veiculos = new List<IVeiculo>();
+        uint lastVeiculoID = 0;
         uint lastTrotineteID = 0;
         uint lastBicicletaID = 0;
 
@@ -21,24 +23,29 @@ namespace ProjectPOO.Data
 
         public Veiculos(bool inicializeDummyData)
         {
-            this.AddVeiculo(new Trotinete("BoltB4", 0.15, 1.15, 0));
-            this.AddVeiculo(new Trotinete("BoltB4", 0.15, 1.15, 0));
-            this.AddVeiculo(new Trotinete("BoltB2", 0.20, 1, 0));
-            this.AddVeiculo(new Bicicleta("BoltT4", 0.15, 1.15, 0));
-            this.AddVeiculo(new Bicicleta("BoltT4", 0.15, 1.15, 0));
-            this.AddVeiculo(new Bicicleta("BoltT3", 0.10, 1, 0));
+            this.AddVeiculo(new Trotinete("BoltT4", 0.15, 1.15));
+            this.AddVeiculo(new Trotinete("BoltT4", 0.15, 1.15));
+            this.AddVeiculo(new Trotinete("BoltT2", 0.20, 1, 100));
+            this.AddVeiculo(new Bicicleta("BoltB4", 0.15, 1.15));
+            this.AddVeiculo(new Bicicleta("BoltB4", 0.15, 1.15, 35));
+            this.AddVeiculo(new Bicicleta("BoltB3", 0.10, 1));
+            this.AddVeiculo(new Trotinete("BoltT4", 0.15, 1.15));
+            this.AddVeiculo(new Bicicleta("BoltB4", 0.15, 1.15));
+            this.AddVeiculo(new Bicicleta("BoltB3", 0.10, 1));
         }
 
         public void AddVeiculo(Trotinete novaTrotinete) 
         {
+            lastVeiculoID = this.veiculos.Any() ? this.veiculos.Max(v => v.Id) : 0;
+
             lastTrotineteID = this.veiculos.Any() ? this.veiculos
                 .Where(v => v.TipoVeiculo.Equals(TipoVeiculo.Trotinete))
-                .OrderByDescending(t => t.Id)
-                .Select(t => t.Id)
+                .OrderByDescending(t => t.Designacao)
+                .Select(t => UInt32.Parse(Regex.Match(t.Designacao, @"\d+").Value))
                 .FirstOrDefault() : 0;
 
-            novaTrotinete.Id = lastTrotineteID + 1;
-            novaTrotinete.SetDesignacao();
+            novaTrotinete.Id = lastVeiculoID + 1;
+            novaTrotinete.SetDesignacao(lastTrotineteID + 1);
 
             //Utilizador cannot be null
             //if (novoUtilizador is null)
@@ -54,14 +61,16 @@ namespace ProjectPOO.Data
 
         public void AddVeiculo(Bicicleta novaBicicleta)
         {
+            lastVeiculoID = this.veiculos.Any() ? this.veiculos.Max(v => v.Id) : 0;
+
             lastBicicletaID = this.veiculos.Any() ? this.veiculos
                 .Where(v => v.TipoVeiculo.Equals(TipoVeiculo.Bicicleta))
-                .OrderByDescending(t => t.Id)
-                .Select(t => t.Id)
+                .OrderByDescending(t => t.Designacao)
+                .Select(t => UInt32.Parse(Regex.Match(t.Designacao, @"\d+").Value))
                 .FirstOrDefault() : 0;
 
-            novaBicicleta.Id = lastBicicletaID + 1;
-            novaBicicleta.SetDesignacao();
+            novaBicicleta.Id = lastVeiculoID + 1;
+            novaBicicleta.SetDesignacao(lastBicicletaID + 1);
 
             //Utilizador cannot be null
             //if (novoUtilizador is null)

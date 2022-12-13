@@ -33,6 +33,6 @@ namespace ProjectPOO.Models
 
         public void UpdateEstadoVeiculo(EstadoVeiculo estadoVeiculo);
 
-        public void SetDesignacao();
+        public void SetDesignacao(uint lastVeciculoTypeID);
     }
 }
