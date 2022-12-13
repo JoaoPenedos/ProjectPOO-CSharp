@@ -406,3 +406,4 @@ FodyWeavers.xsd
 /WinFormsApp1/ProjectPOO.Models/obj/ProjectPOO.Models.csproj.nuget.g.targets
 /WinFormsApp1/WinFormsApp1/obj/WinFormsApp1.csproj.nuget.g.targets
 /WinFormsApp1/WinFormsApp1/obj/WinFormsApp1.csproj.nuget.g.props
+/WinFormsApp1/WinFormsApp1/obj/Debug/net6.0-windows/WinFormsApp1.csproj.AssemblyReference.cache
