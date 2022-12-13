@@ -13,7 +13,7 @@ namespace ProjectPOO.Enums
 
     public enum EstadoVeiculo
     {
-        Avariado, Inativo, SemBateria, Ativo 
+        Avariado, Inativo, SemBateria, Ativo, Reservado
     }
 
     public enum EstadoReserva

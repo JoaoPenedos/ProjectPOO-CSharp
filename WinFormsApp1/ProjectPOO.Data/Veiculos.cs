@@ -16,6 +16,11 @@ namespace ProjectPOO.Data
 
         public Veiculos()
         {
+
+        }
+
+        public Veiculos(bool inicializeDummyData)
+        {
             this.AddVeiculo(new Trotinete("BoltB4", 0.15, 1.15, 0));
             this.AddVeiculo(new Trotinete("BoltB4", 0.15, 1.15, 0));
             this.AddVeiculo(new Trotinete("BoltB2", 0.20, 1, 0));
@@ -157,5 +162,11 @@ namespace ProjectPOO.Data
         /// </summary>
         /// <returns> return the teachers list </returns>
         public List<IVeiculo> ListVeiculos() => this.veiculos;
+
+
+        public List<IVeiculo> ListVeiculosBicicletas() => this.veiculos.Where(v => v.TipoVeiculo.Equals(TipoVeiculo.Bicicleta)).ToList();
+
+
+        public List<IVeiculo> ListVeiculosTrotinetes() => this.veiculos.Where(v => v.TipoVeiculo.Equals(TipoVeiculo.Trotinete)).ToList();
     }
 }

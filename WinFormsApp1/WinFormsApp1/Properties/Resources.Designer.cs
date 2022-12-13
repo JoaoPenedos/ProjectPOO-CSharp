@@ -73,6 +73,16 @@ namespace WinFormsApp1.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
+        internal static System.Drawing.Bitmap EyeIcon {
+            get {
+                object obj = ResourceManager.GetObject("EyeIcon", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
         internal static System.Drawing.Bitmap istockphoto_1318443231_612x612_removebg_preview {
             get {
                 object obj = ResourceManager.GetObject("istockphoto-1318443231-612x612-removebg-preview", resourceCulture);

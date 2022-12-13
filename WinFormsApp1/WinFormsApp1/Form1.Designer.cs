@@ -201,7 +201,7 @@
             this.dataGridViewReserva.ReadOnly = true;
             this.dataGridViewReserva.RowHeadersWidth = 50;
             this.dataGridViewReserva.RowTemplate.Height = 28;
-            this.dataGridViewReserva.Size = new System.Drawing.Size(786, 442);
+            this.dataGridViewReserva.Size = new System.Drawing.Size(348, 238);
             this.dataGridViewReserva.TabIndex = 12;
             this.dataGridViewReserva.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.DataGridViewSoftware_CellClick);
             // 
@@ -235,6 +235,7 @@
             this.Controls.Add(this.menuStrip1);
             this.MainMenuStrip = this.menuStrip1;
             this.Name = "Form1";
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Form1";
             this.Load += new System.EventHandler(this.Form1_Load);
             this.menuStrip1.ResumeLayout(false);

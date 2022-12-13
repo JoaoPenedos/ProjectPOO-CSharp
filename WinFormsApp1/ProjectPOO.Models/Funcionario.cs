@@ -10,8 +10,8 @@ namespace ProjectPOO.Models
     {
         private readonly int lastFuncionarioID = -1;
 
-        public Funcionario(string email, string nome, int numeroTelemovel)
-             : base(email, nome, numeroTelemovel)
+        public Funcionario(string email, string nome, string password, int numeroTelemovel)
+             : base(email, nome, password, numeroTelemovel)
         {
             this.FuncionarioID = lastFuncionarioID + 1;
         }

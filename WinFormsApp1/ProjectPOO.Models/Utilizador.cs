@@ -8,13 +8,14 @@ namespace ProjectPOO.Models
 {
     public class Utilizador : Pessoa
     {
-        public Utilizador(string email, string nome, int numeroTelemovel, DateTime dataNascimento, string Morada)
-             : base(email,nome,numeroTelemovel)
+        public Utilizador(string email, string nome, string password, int numeroTelemovel, DateTime dataNascimento, string Morada)
+            : base(email, nome, password, numeroTelemovel)
         {
-            this.Email= email;
             this.DataNascimento = dataNascimento;
             this.Morada = Morada;
         }
+
+        public uint Id { get; set; }
 
         public DateTime DataNascimento { get; set; }
 

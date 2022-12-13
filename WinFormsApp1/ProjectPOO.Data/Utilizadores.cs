@@ -4,26 +4,35 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using static System.Reflection.Metadata.BlobBuilder;
 
 namespace ProjectPOO.Data
 {
     public class Utilizadores
     {
-        List<Utilizador> utilizadores = new List<Utilizador>();
-        
-        
+        public static List<Utilizador> utilizadores = new List<Utilizador>();
+        private static Utilizador loggedUser = null;
+        uint lastUtilizadorID = 0;
+
         public Utilizadores()
         {
-            this.AddUtilizador(new Utilizador("manuelAntonio@gmail.com", "Manuel Antonio", 935462613, DateTime.Now, "Alvelos" ));
-            this.AddUtilizador(new Utilizador("ToneMaria@gmail.com", "Tone Maria", 945646513, DateTime.Now, "Brasiu" ));
-            this.AddUtilizador(new Utilizador("Manuela@gmail.com", "Prima do Manuel", 945678977, DateTime.Now, "Alvelinhos" ));
+
         }
 
+        public Utilizadores(bool inicializeDummyData)
+        {
+            this.AddUtilizador(new Utilizador("manuelAntonio@gmail.com", "manuel", "manuel", 935462613, DateTime.Now, "Alvelos" ));
+            this.AddUtilizador(new Utilizador("ToneMaria@gmail.com", "tone", "tone", 945646513, DateTime.Now, "Brasiu" ));
+            this.AddUtilizador(new Utilizador("Manuela@gmail.com", "manuela", "prima", 945678977, DateTime.Now, "Alvelinhos" ));
+        }
 
         //methods
 
         public void AddUtilizador(Utilizador novoUtilizador)
         {
+            lastUtilizadorID = Utilizadores.utilizadores.Any() ? Utilizadores.utilizadores.Max(r => r.Id) : 0;
+            novoUtilizador.Id = lastUtilizadorID + 1;
+
             //Utilizador cannot be null
             //if (novoUtilizador is null)
             //    throw new TeacherIsNullException("School2.Data.Teachers.Add()");
@@ -33,7 +42,7 @@ namespace ProjectPOO.Data
             //    throw new TeacherAlreadyExistsException("School2.Data.Teachers.Add()");
 
             //add teacher
-            this.utilizadores.Add(novoUtilizador);
+            Utilizadores.utilizadores.Add(novoUtilizador);
         }
 
         public void UpdateUtilizador(Utilizador utilizador)
@@ -50,10 +59,10 @@ namespace ProjectPOO.Data
             //    throw new TeacherDoesNotExistsException("School2.Data.Teachers.Update()");
 
             //get index of the wanted teacher
-            index = this.utilizadores.FindIndex(u => u.Email.Equals(utilizador.Email));
+            index = Utilizadores.utilizadores.FindIndex(u => u.Email.Equals(utilizador.Email));
 
             //update teachers with the new teacher
-            this.utilizadores[index] = utilizador;
+            Utilizadores.utilizadores[index] = utilizador;
         }
 
         public void DeleteUtilizador(Utilizador utilizador)
@@ -70,38 +79,45 @@ namespace ProjectPOO.Data
             //throw new TeacherDoesNotExistsException("School2.Data.Teachers.Delete()");
 
             //get index of the wanted teacher
-            index = this.utilizadores.FindIndex(u => u.Email.Equals(utilizador.Email));
+            index = Utilizadores.utilizadores.FindIndex(u => u.Email.Equals(utilizador.Email));
 
             //remove the wanted teacher
-            this.utilizadores.RemoveAt(index);
+            Utilizadores.utilizadores.RemoveAt(index);
         }
 
         /// <summary>
         /// Method to List all the utilizadores in the list
         /// </summary>
         /// <returns> return the teachers list </returns>
-        public List<Utilizador> ListUtilizadores() => this.utilizadores;
+        public List<Utilizador> ListUtilizadores() => Utilizadores.utilizadores;
 
 
 
 
+        public static bool IsUserLogged() => loggedUser != null && loggedUser.Id != 0;
 
+        public static Utilizador GetUserLogged() => loggedUser;
 
-        ///// <summary>
-        ///// Method to list all the teachers in a list format in a specific Department
-        ///// </summary>
-        ///// <param name="department"> Department to search teachers </param>
-        ///// <returns> return the teachers in the specific department in a list format </returns>
-        //public List<Utilizador> Get(Departments department) =>
-        //    this.teachers.Where(t => t.Department.Equals(department)).ToList();
+        private static void SetUserLogged(Utilizador user) { loggedUser = user; }
 
-        ///// <summary>
-        ///// Method to list all the teachers in a list format older than the given age
-        ///// </summary>
-        ///// <param name="olderThan"> Age to search teachers olders than that</param>
-        ///// <returns> return the teachers older than the given age in a list format </returns>
-        //public List<Teacher> Get(int olderThan) =>
-        //    this.teachers.Where(t => t.Age() > olderThan).ToList();
+        public static void Logout() => loggedUser = null;
 
+        public static void SetDevMode(Utilizador u) => SetUserLogged(u);
+
+        public static bool IsAutenticacaoValida(string nome, string pass)
+        {
+            Utilizador? user = utilizadores.FirstOrDefault(u => u.Nome.Equals(nome) && u.Password.Equals(pass));
+
+            if (user == null)
+            {
+                throw new Exception("User does not exist");
+                return false;
+            }
+            else
+            {
+                SetUserLogged(user);
+                return true;
+            }
+        }
     }
 }
