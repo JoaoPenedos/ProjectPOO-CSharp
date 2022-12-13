@@ -31,6 +31,7 @@ namespace WinFormsApp1
             this.dataGridViewReserva.BackgroundColor = Color.White;
             this.dataGridViewReserva.RowHeadersVisible = false;
             this.dataGridViewReserva.Visible = false;
+            this.dataGridViewReserva.Columns["ButtonReserva"].Visible = false;
 
             this.comboBoxPosto.Visible = false;
             this.pictureBoxBicicleta.Visible = false;
@@ -52,7 +53,7 @@ namespace WinFormsApp1
             if (existeUser)
             {
                 this.toolStripStatusLabel1.Text = Utilizadores.GetUserLogged().Nome;
-                UpdateDataGridViewState(ListUtilizadorReservas());
+                UpdateDataGridViewState(ListSpecificReservasUtilizador());
             }
         }
 
@@ -66,11 +67,13 @@ namespace WinFormsApp1
             this.dataGridViewReserva.DataSource = bs;
             if (typeof(T) == typeof(IVeiculo))
             {
+                this.dataGridViewReserva.Columns["ButtonReserva"].Visible = true;
                 this.dataGridViewReserva.Columns["EstadoVeiculo"].Visible = false;
                 this.dataGridViewReserva.Columns["Kilometros"].Visible = false;
             }
 
             DataGridViewElementStates states = DataGridViewElementStates.None;
+            this.dataGridViewReserva.AutoResizeColumns();
             this.dataGridViewReserva.ScrollBars = ScrollBars.None;
             var totalHeight = this.dataGridViewReserva.Rows.GetRowsHeight(states) + this.dataGridViewReserva.ColumnHeadersHeight;
             var totalWidth = this.dataGridViewReserva.Columns.Cast<DataGridViewColumn>().Where(x => x.Visible).Sum(x => x.Width);
@@ -153,7 +156,7 @@ namespace WinFormsApp1
         }
 
 
-        public List<ReservaComposta> ListUtilizadorReservas()
+        public List<ReservaComposta> ListAllReservaUtilizador()
         {
             var query = from v in veiculos.ListVeiculos()
                         join r in reservas.ListReservas() on v.Id equals r.VeiculoId
@@ -162,6 +165,15 @@ namespace WinFormsApp1
             return query.ToList();
         }
 
+        public List<ReservaComposta> ListSpecificReservasUtilizador()
+        {
+            var query = from v in veiculos.ListVeiculos()
+                        join r in reservas.ListReservas() on v.Id equals r.VeiculoId
+                        join u in utilizadores.ListUtilizadores() on r.UtilizadorId equals u.Id
+                        where u.Id == Utilizadores.GetUserLogged().Id
+                        select new ReservaComposta { Nome = u.Nome, DataReserva = r.DataReserva, VeiculoDesignacao = v.Designacao };
+            return query.ToList();
+        }
 
         //////////// IMPORTANTE
         ////veiculos.AddVeiculo(new Trotinete("BoltT2", 0.30, 0.95, 14));
