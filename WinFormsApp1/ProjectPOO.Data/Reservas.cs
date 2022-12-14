@@ -13,21 +13,13 @@ namespace ProjectPOO.Data
         List<Reserva> reservas = new List<Reserva>();
         uint lastReservaID = 0;
 
-        public Reservas()
-        { 
-            
-        }
-
-        public Reservas(bool inicializeDummyData)
-        {
-            this.AddReserva(new Reserva(DateTime.Now, 2, 3));
-            this.AddReserva(new Reserva(DateTime.Now, 2, 2));
-            this.AddReserva(new Reserva(DateTime.Now, 1, 1));
-            this.AddReserva(new Reserva(DateTime.Now, 3, 6));
-            this.AddReserva(new Reserva(DateTime.Now, 1, 5));
-            this.AddReserva(new Reserva(DateTime.Now, 4, 9));
-            this.AddReserva(new Reserva(DateTime.Now, 4, 7));
-        }
+        //public Reservas(bool inicializeDummyData)
+        //{
+        //    this.AddReserva(new Reserva(DateTime.Now, 2, 3));
+        //    this.AddReserva(new Reserva(DateTime.Now, 1, 1));
+        //    this.AddReserva(new Reserva(DateTime.Now, 4, 9));
+        //    this.AddReserva(new Reserva(DateTime.Now, 4, 7));
+        //}
 
         public void AddReserva(Reserva novaReserva)
         {
@@ -46,10 +38,57 @@ namespace ProjectPOO.Data
             this.reservas.Add(novaReserva);
         }
 
+        public void UpdateReserva(Reserva reserva)
+        {
+            //variables
+            int index;
+
+            //teacher cannot be null
+            //if (teacher is null)
+            //    throw new TeacherIsNullException("School2.Data.Teachers.Update()");
+
+            //find if teacher exists in the list
+            //if (this.teachers.Exists(t => t.Contribuinte.Equals(teacher.Contribuinte)))
+            //    throw new TeacherDoesNotExistsException("School2.Data.Teachers.Update()");
+
+            //get index of the wanted teacher
+            index = this.reservas.FindIndex(u => u.Id.Equals(reserva.Id));
+
+            //update teachers with the new teacher
+            this.reservas[index] = reserva;
+        }
+
+        public void DeleteReserva(Reserva reserva)
+        {
+            //variables
+            int index;
+
+            //teacher cannot be null
+            //if (teacher is null)
+            //    throw new TeacherIsNullException("School2.Data.Teachers.Delete()");
+
+            //find if teacher exists in the list
+            //if (this.teachers.Exists(t => t.Contribuinte.Equals(teacher.Contribuinte)))
+            //throw new TeacherDoesNotExistsException("School2.Data.Teachers.Delete()");
+
+            //get index of the wanted teacher
+            index = this.reservas.FindIndex(u => u.Id.Equals(reserva.Id));
+
+            //remove the wanted teacher
+            this.reservas.RemoveAt(index);
+        }
+
         /// <summary>
         /// Method to List all the utilizadores in the list
         /// </summary>
         /// <returns> return the teachers list </returns>
         public List<Reserva> ListReservas() => this.reservas;
+
+        public Reserva FindReserva(uint id) => this.reservas.FirstOrDefault(r => r.Id.Equals(id)) 
+            ?? throw new Exception("Id não existe na lista de reservas");
+        
+        public Reserva FindReserva(uint utilizadorId, uint veiculoId) => this.reservas.FirstOrDefault(r => r.UtilizadorId.Equals(utilizadorId) && r.VeiculoId.Equals(veiculoId)) 
+            ?? throw new Exception("Id do utilizador ou do veiculo não existe na lista de reservas");
+
     }
 }

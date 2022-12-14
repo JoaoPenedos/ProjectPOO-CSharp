@@ -9,11 +9,8 @@ namespace ProjectPOO.Models
 {
     public class Pagamento
     {
-        private readonly int lastPagamentoID = -1;
-
         public Pagamento(double montante, DateTime dataEmissao, DateTime dataPagamento = default, string descricao = "")
         {
-            this.PagamentoID = lastPagamentoID + 1;
             this.Montante = montante;
             this.DataEmissao = dataEmissao;
             this.DataPagamento = dataPagamento;
@@ -21,7 +18,7 @@ namespace ProjectPOO.Models
             this.EstadoPagamento = EstadoPagamento.NaoPago;
         }
 
-        public int PagamentoID { get; private set; }
+        public int Id { get; private set; }
 
         public double Montante { get; set; }
 

@@ -30,7 +30,7 @@ namespace ProjectPOO.Models
             this.TipoVeiculo = TipoVeiculo.Trotinete;
         }
 
-        [Browsable(false)]
+        //[Browsable(false)]
         public uint Id { get; set; }
 
         public string Designacao { get; set; }
@@ -51,8 +51,6 @@ namespace ProjectPOO.Models
 
         public void UpdateKilometros(int newKilometrosTraveled) => this.Kilometros += newKilometrosTraveled;
 
-        public void UpdateEstadoVeiculo(EstadoVeiculo estadoVeiculo) => this.EstadoVeiculo = estadoVeiculo;
-
-        public void SetDesignacao(uint lastTrotineteID) => this.Designacao = "Trotinete_N" + lastTrotineteID.ToString("00");
+        public void SetDesignacao(uint lastTrotineteID) => this.Designacao = "Trotinete_N" + lastTrotineteID.ToString("000");
     }
 }

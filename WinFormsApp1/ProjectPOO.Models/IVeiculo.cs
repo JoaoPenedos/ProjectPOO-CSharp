@@ -10,7 +10,7 @@ namespace ProjectPOO.Models
 {
     public interface IVeiculo
     {
-        [Browsable(false)]
+        //[Browsable(false)]
         public uint Id { get; set; }
 
         public string Designacao { get; set; }
@@ -21,17 +21,15 @@ namespace ProjectPOO.Models
 
         public double CustoReserva { get; set; }
 
-        public EstadoVeiculo EstadoVeiculo { get; protected set; }
+        public EstadoVeiculo EstadoVeiculo { get; set; }
 
         public int Kilometros { get; protected set; }
 
-        public TipoVeiculo TipoVeiculo { get; protected set; }
+        public TipoVeiculo TipoVeiculo { get; set; }
 
 
 
         public void UpdateKilometros(int newKilometrosTraveled);
-
-        public void UpdateEstadoVeiculo(EstadoVeiculo estadoVeiculo);
 
         public void SetDesignacao(uint lastVeciculoTypeID);
     }

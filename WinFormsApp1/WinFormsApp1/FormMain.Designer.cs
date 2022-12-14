@@ -1,6 +1,6 @@
 ﻿namespace WinFormsApp1
 {
-    partial class Form1
+    partial class FormMain
     {
         /// <summary>
         ///  Required designer variable.
@@ -45,6 +45,7 @@
             this.buttonProcurarReserva = new System.Windows.Forms.Button();
             this.dataGridViewReserva = new System.Windows.Forms.DataGridView();
             this.ButtonReserva = new System.Windows.Forms.DataGridViewButtonColumn();
+            this.ButtonCancelar = new System.Windows.Forms.DataGridViewButtonColumn();
             this.menuStrip1.SuspendLayout();
             this.statusStrip1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBoxBicicleta)).BeginInit();
@@ -195,7 +196,8 @@
             this.dataGridViewReserva.AllowUserToDeleteRows = false;
             this.dataGridViewReserva.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dataGridViewReserva.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
-            this.ButtonReserva});
+            this.ButtonReserva,
+            this.ButtonCancelar});
             this.dataGridViewReserva.Location = new System.Drawing.Point(310, 60);
             this.dataGridViewReserva.Name = "dataGridViewReserva";
             this.dataGridViewReserva.ReadOnly = true;
@@ -216,7 +218,18 @@
             this.ButtonReserva.UseColumnTextForButtonValue = true;
             this.ButtonReserva.Width = 125;
             // 
-            // Form1
+            // ButtonCancelar
+            // 
+            this.ButtonCancelar.HeaderText = "Cancelar";
+            this.ButtonCancelar.MinimumWidth = 6;
+            this.ButtonCancelar.Name = "ButtonCancelar";
+            this.ButtonCancelar.ReadOnly = true;
+            this.ButtonCancelar.Resizable = System.Windows.Forms.DataGridViewTriState.False;
+            this.ButtonCancelar.Text = "Cancelar";
+            this.ButtonCancelar.UseColumnTextForButtonValue = true;
+            this.ButtonCancelar.Width = 125;
+            // 
+            // FormMain
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 20F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
@@ -234,10 +247,10 @@
             this.Controls.Add(this.statusStrip1);
             this.Controls.Add(this.menuStrip1);
             this.MainMenuStrip = this.menuStrip1;
-            this.Name = "Form1";
+            this.Name = "FormMain";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
-            this.Text = "Form1";
-            this.Load += new System.EventHandler(this.Form1_Load);
+            this.Text = "FormMain";
+            this.Load += new System.EventHandler(this.FormMain_Load);
             this.menuStrip1.ResumeLayout(false);
             this.menuStrip1.PerformLayout();
             this.statusStrip1.ResumeLayout(false);
@@ -268,5 +281,6 @@
         private Button buttonProcurarReserva;
         private DataGridView dataGridViewReserva;
         private DataGridViewButtonColumn ButtonReserva;
+        private DataGridViewButtonColumn ButtonCancelar;
     }
 }

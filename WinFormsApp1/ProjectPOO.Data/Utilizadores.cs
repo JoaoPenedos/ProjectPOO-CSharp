@@ -11,24 +11,19 @@ namespace ProjectPOO.Data
     public class Utilizadores
     {
         public static List<Utilizador> utilizadores = new List<Utilizador>();
-        private static Utilizador loggedUser = null;
+        private static Utilizador? loggedUser = null;
         uint lastUtilizadorID = 0;
 
-        public Utilizadores()
-        {
-
-        }
-
-        public Utilizadores(bool inicializeDummyData)
-        {
-            this.AddUtilizador(new Utilizador("manuelAntonio@gmail.com", "Manuel", "maNuel", 935462613, DateTime.Now, "Alvelos" ));
-            this.AddUtilizador(new Utilizador("ToneMaria@gmail.com", "tone", "tone", 945646513, DateTime.Now, "Brasiu" ));
-            this.AddUtilizador(new Utilizador("Manuela@gmail.com", "manuela", "prima", 945678977, DateTime.Now, "Alvelinhos" ));
-            this.AddUtilizador(new Utilizador("Emanuel@outlook.com", "Emanuel", "José", 123456789, DateTime.Now, "Mexico" ));
-        }
+        
+        //public Utilizadores(bool inicializeDummyData)
+        //{
+        //    this.AddUtilizador(new Utilizador("manuelAntonio@gmail.com", "Manuel", "maNuel", 935462613, DateTime.Now, "Alvelos" ));
+        //    this.AddUtilizador(new Utilizador("ToneMaria@gmail.com", "tone", "tone", 945646513, DateTime.Now, "Brasiu" ));
+        //    this.AddUtilizador(new Utilizador("Manuela@gmail.com", "manuela", "prima", 945678977, DateTime.Now, "Alvelinhos" ));
+        //    this.AddUtilizador(new Utilizador("Emanuel@outlook.com", "Emanuel", "José", 123456789, DateTime.Now, "Mexico" ));
+        //}
 
         //methods
-
         public void AddUtilizador(Utilizador novoUtilizador)
         {
             lastUtilizadorID = Utilizadores.utilizadores.Any() ? Utilizadores.utilizadores.Max(r => r.Id) : 0;
@@ -92,12 +87,12 @@ namespace ProjectPOO.Data
         /// <returns> return the teachers list </returns>
         public List<Utilizador> ListUtilizadores() => Utilizadores.utilizadores;
 
-
+        public Utilizador FindUtilizador(string nome) => Utilizadores.utilizadores.FirstOrDefault(u => u.Nome.Equals(nome)) ?? throw new Exception("Nome não existe na lista de utilizadores");
 
 
         public static bool IsUserLogged() => loggedUser != null && loggedUser.Id != 0;
 
-        public static Utilizador GetUserLogged() => loggedUser;
+        public static Utilizador? GetUserLogged() => loggedUser;
 
         private static void SetUserLogged(Utilizador user) { loggedUser = user; }
 

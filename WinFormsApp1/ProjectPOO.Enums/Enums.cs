@@ -18,7 +18,7 @@ namespace ProjectPOO.Enums
 
     public enum EstadoReserva
     {
-        EmEsepra, Cancelada, Utilizada, NaoValidade
+        EmEspera, Cancelada, Utilizada, NaoValidade
     }
 
     public enum EstadoPagamento

@@ -16,6 +16,7 @@ namespace ProjectPOO.Models
             this.UtilizadorId = utilizadorId;
             //this.PostoId = postoId;
             this.VeiculoId = veiculoId;
+            this.EstadoReserva = EstadoReserva.EmEspera;
         }
 
         public uint Id { get; set; }
@@ -29,5 +30,7 @@ namespace ProjectPOO.Models
         //public uint PostoId { get; set; }
 
         public uint VeiculoId { get; set; }
+
+        public EstadoReserva EstadoReserva { get; set; }
     }
 }
