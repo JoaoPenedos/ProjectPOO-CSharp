@@ -37,16 +37,16 @@ namespace WinFormsApp1
 
         private void ButtonLoginOk_Click(object sender, EventArgs e)
         {
-            if (textBoxUtilizador.Text != null && textBoxUtilizador.Text.Trim() != string.Empty
-                && textBoxPassword.Text != null && textBoxPassword.Text.Trim() != string.Empty)
+            if (textBoxUtilizador.Text != null && this.textBoxUtilizador.Text.Trim() != string.Empty
+                && textBoxPassword.Text != null && this.textBoxPassword.Text.Trim() != string.Empty)
             {
-                if (Utilizadores.IsAutenticacaoValida(this.textBoxUtilizador.Text.Trim(), this.textBoxPassword.Text.Trim()))
+                if (SystemLogin.IsAutenticacaoValida(this.textBoxUtilizador.Text.Trim(), this.textBoxPassword.Text.Trim()))
                     this.Close();
                 else
                     MessageBox.Show("Autenticação inválida.", "Atenção...", MessageBoxButtons.OK, MessageBoxIcon.Warning);
             }
-            else 
-                throw new ApplicationException("Invalid entry, please try again.");            
+            else
+                MessageBox.Show("Preencha todos os campos", "Atenção...", MessageBoxButtons.OK, MessageBoxIcon.Warning);
         }
 
     }

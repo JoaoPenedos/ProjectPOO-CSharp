@@ -15,12 +15,13 @@ namespace WinFormsApp1
     public partial class FormMain : Form
     {
         //State Variables
-        Veiculos veiculos = new();
-        Reservas reservas = new();
-        Utilizadores utilizadores = new();
+        readonly Veiculos veiculos = new();
+        readonly Reservas reservas = new();
+        readonly Utilizadores utilizadores = new();
         IVeiculo veiculoEscolhido;
         Reserva reservaEscolhida;
-        Utilizador utilizadorEscolhido;
+        IPessoa utilizadorEscolhido;
+        IPessoa? utilizador;
         bool existeUtilizador;
 
         /// <summary>
@@ -28,14 +29,15 @@ namespace WinFormsApp1
         /// </summary>
         public FormMain()
         {
-            // Inicializa o Formulario principal
+            // Inicializa o Form principal
             InitializeComponent();
 
             //Dummy data para a lista de utilizadores
-            utilizadores.AddUtilizador(new Utilizador("manuelAntonio@gmail.com", "Manuel", "maNuel", 935462613, DateTime.Now, "Alvelos"));
-            utilizadores.AddUtilizador(new Utilizador("ToneMaria@gmail.com", "tone", "tone", 945646513, DateTime.Now, "Brasiu"));
-            utilizadores.AddUtilizador(new Utilizador("Manuela@gmail.com", "manuela", "prima", 945678977, DateTime.Now, "Alvelinhos"));
-            utilizadores.AddUtilizador(new Utilizador("Emanuel@outlook.com", "Emanuel", "José", 123456789, DateTime.Now, "Mexico"));
+            utilizadores.AddUtilizador(new Utilizador("manuelAntonio@gmail.com", "Manuel", "maNuel", 935462613, DateTime.Now, "Alvelos", 10.32));
+            utilizadores.AddUtilizador(new Utilizador("ToneMaria@gmail.com", "tone", "tone", 945646513, DateTime.Now, "Brasiu", 13.45));
+            utilizadores.AddUtilizador(new Utilizador("Manuela@gmail.com", "manuela", "prima", 945678977, DateTime.Now, "Alvelinhos", 0.34));
+            utilizadores.AddUtilizador(new Utilizador("Emanuel@outlook.com", "Emanuel", "José", 123456789, DateTime.Now, "Mexico", 5.1));
+            utilizadores.AddUtilizador(new Funcionario("ferreirasantos@gmail.com", "Ferreira", "Santos", 937587613, DateTime.Now));
 
             //Dummy data para a lista de veiculos
             veiculos.AddVeiculo(new Trotinete("BoltT4", 0.15, 1.15));
@@ -70,7 +72,7 @@ namespace WinFormsApp1
         private void BootFormDashboard()
         {
             //verificar se existe algum utilizador logado
-            existeUtilizador = Utilizadores.IsUserLogged();
+            existeUtilizador = SystemLogin.IsUserLogged();
 
             //set estado dos diferentes Forms no BootFormDashboard
             this.dataGridViewReserva.ColumnHeadersVisible = true;
@@ -80,6 +82,7 @@ namespace WinFormsApp1
             this.dataGridViewReserva.Visible = false;
             this.dataGridViewReserva.Columns["ButtonReserva"].Visible = false;
             this.dataGridViewReserva.Columns["ButtonCancelar"].Visible = true;
+
             this.comboBoxPosto.Visible = false;
             this.pictureBoxBicicleta.Visible = false;
             this.pictureBoxTrotinete.Visible = false;
@@ -88,29 +91,58 @@ namespace WinFormsApp1
             this.buttonProcurarReserva.Visible = false;
             this.checkBoxBicicleta.Visible = false;
             this.checkBoxTrotinete.Visible = false;
-            this.checkBoxBicicleta.Checked = false;
-            this.checkBoxTrotinete.Checked = false;
+            this.toolStripStatusLabelSaldo.Visible = false;
 
-            //colocar o estado do toolStripMenu e toolStripStatus visivel dependente de se existe ou não utilizador
+            this.labelCountReservas.Visible = existeUtilizador;
+            this.toolStripMenuLogin.Visible = !existeUtilizador;
+            this.toolStripMenuLogout.Visible = existeUtilizador;
             this.toolStripMenuDasboard.Visible = existeUtilizador;
             this.toolStripMenuReservar.Visible = existeUtilizador;
-            this.toolStripStatusLabel1.Visible = existeUtilizador;
-            this.toolStripMenuLogout.Visible = existeUtilizador;
-            this.toolStripMenuLogin.Visible = !existeUtilizador;
+            this.toolStripMenuVeiculos.Visible = existeUtilizador;
+            this.toolStripMenuReservas.Visible = existeUtilizador;
+            this.toolStripMenuCarregarSaldo.Visible = existeUtilizador;
+            this.toolStripStatusLabelNome.Visible = existeUtilizador;
 
             //se existir utilizador logado
             if (existeUtilizador)
             {
-                //get nome do atual utilizador logado
-                this.toolStripStatusLabel1.Text = Utilizadores.GetUserLogged().Nome;
+                utilizador = SystemLogin.GetUserLogged();
 
-                //se ouver revervas para listar, lista as mesmas, senão esconde os headers do dataGridView
-                if (this.ListSpecificReservasUtilizador().Any())
-                    UpdateDataGridViewState(ListSpecificReservasUtilizador());
-                else
-                    this.dataGridViewReserva.ColumnHeadersVisible = false;
+                //get nome do atual utilizador logado
+                this.toolStripStatusLabelNome.Text = utilizador.Nome;
                 
-                //this.ListSpecificReservasUtilizador().Any() ? UpdateDataGridViewState(ListSpecificReservasUtilizador()) : this.dataGridViewReserva.ColumnHeadersVisible = false;
+                if (utilizador is Funcionario)
+                {
+                    this.toolStripMenuDasboard.Visible = false;
+                    this.toolStripMenuReservar.Visible = false;
+                    this.toolStripMenuVeiculos.Visible = existeUtilizador;
+                    this.toolStripMenuReservas.Visible = existeUtilizador;
+                    this.toolStripMenuCarregarSaldo.Visible = false;
+                }
+                else
+                {
+                    this.toolStripStatusLabelSaldo.Visible = existeUtilizador;
+                    Utilizador? u = utilizadores.FindUtilizadorUtilizador(utilizador.Id);
+                    this.toolStripStatusLabelSaldo.Text = Math.Round(u.Saldo, 2).ToString() + "€";
+
+                    //se ouver revervas para listar, lista as mesmas, senão esconde os headers do dataGridView
+                    if (this.ListSpecificReservasUtilizador().Any()) 
+                    { 
+                        this.labelCountReservas.Text = "Tem " + ListSpecificReservasUtilizador().Count + " reservas em espera";
+                        UpdateDataGridViewState(ListSpecificReservasUtilizador());
+                    }
+                    else
+                    {
+                        this.labelCountReservas.Text = "Tem " + ListSpecificReservasUtilizador().Count + " reservas em espera";
+                        this.dataGridViewReserva.ColumnHeadersVisible = false;
+                    }
+                    
+                    this.toolStripMenuDasboard.Visible = existeUtilizador;
+                    this.toolStripMenuReservar.Visible = existeUtilizador;
+                    this.toolStripMenuVeiculos.Visible = false;
+                    this.toolStripMenuReservas.Visible = false;
+                    this.toolStripMenuCarregarSaldo.Visible = existeUtilizador;
+                }
             }
         }
 
@@ -120,7 +152,7 @@ namespace WinFormsApp1
         private void BootFormReservar()
         {
             //verificar se existe algum utilizador logado
-            existeUtilizador = Utilizadores.IsUserLogged();
+            existeUtilizador = SystemLogin.IsUserLogged();
 
             //set estado dos diferentes Forms no BootFormReserva
             this.dataGridViewReserva.ColumnHeadersVisible = true;
@@ -128,6 +160,7 @@ namespace WinFormsApp1
             this.dataGridViewReserva.BackgroundColor = Color.White;
             this.dataGridViewReserva.RowHeadersVisible = false;
             this.dataGridViewReserva.Visible = false;
+            this.labelCountReservas.Visible = false;
             this.comboBoxPosto.Visible = false;
             this.pictureBoxBicicleta.Visible = existeUtilizador;
             this.pictureBoxTrotinete.Visible = existeUtilizador;
@@ -138,6 +171,9 @@ namespace WinFormsApp1
             this.checkBoxTrotinete.Visible = existeUtilizador;
             this.checkBoxBicicleta.Checked = false;
             this.checkBoxTrotinete.Checked = false;
+
+            Utilizador? u = utilizadores.FindUtilizadorUtilizador(utilizador.Id);
+            this.toolStripStatusLabelSaldo.Text = Math.Round(u.Saldo, 2).ToString() + "€";
         }
 
         /// <summary>
@@ -153,7 +189,7 @@ namespace WinFormsApp1
             this.dataGridViewReserva.DataSource = null;
 
             //Vincular a lista recebida ao dataGridView
-            BindingList<T> bindingList = new BindingList<T>(list);
+            BindingList<T> bindingList = new(list);
             BindingSource? bs = new(bindingList, null);
             this.dataGridViewReserva.DataSource = bs;
 
@@ -202,7 +238,7 @@ namespace WinFormsApp1
             var query = from v in veiculos.ListVeiculos()
                         join r in reservas.ListReservas() on v.Id equals r.VeiculoId
                         join u in utilizadores.ListUtilizadores() on r.UtilizadorId equals u.Id
-                        where u.Id == Utilizadores.GetUserLogged().Id && r.EstadoReserva.Equals(EstadoReserva.EmEspera)
+                        where u.Id == SystemLogin.GetUserLogged().Id && r.EstadoReserva.Equals(EstadoReserva.EmEspera)
                         select new ReservaComposta { Nome = u.Nome, DataReserva = r.DataReserva, VeiculoDesignacao = v.Designacao };
             return query.ToList();
         }
@@ -214,28 +250,8 @@ namespace WinFormsApp1
         /// <param name="e">contém os dados do evento</param>
         private void FormMain_Load(object sender, EventArgs e)
         {
-            Utilizadores.SetDevMode(utilizadores.ListUtilizadores().ElementAt(1));
+            SystemLogin.SetDevMode(utilizadores.ListUtilizadores().ElementAt(2));
             this.BootFormDashboard();
-        }
-
-        /// <summary>
-        /// Evento iniciado ao clicar no botão Dashboard do menu
-        /// </summary>
-        /// <param name="sender">referência ao controlo/objeto que gerou o evento</param>
-        /// <param name="e">contém os dados do evento</param>
-        private void ToolStripMenuDashboard_Click(object sender, EventArgs e)
-        {
-            this.BootFormDashboard();
-        }
-
-        /// <summary>
-        /// Evento iniciado ao clicar no botão Reservar do menu
-        /// </summary>
-        /// <param name="sender">referência ao controlo/objeto que gerou o evento</param>
-        /// <param name="e">contém os dados do evento</param>
-        private void ToolStripMenuReservar_Click(object sender, EventArgs e)
-        {
-            this.BootFormReservar();
         }
 
         /// <summary>
@@ -259,8 +275,43 @@ namespace WinFormsApp1
         private void ToolStripMenuLogout_Click(object sender, EventArgs e)
         {
             //Logout ao utilizador atual
-            Utilizadores.Logout();
+            SystemLogin.Logout();
             this.BootFormDashboard();
+        }
+
+        /// <summary>
+        /// Evento iniciado ao clicar no botão Dashboard do menu
+        /// </summary>
+        /// <param name="sender">referência ao controlo/objeto que gerou o evento</param>
+        /// <param name="e">contém os dados do evento</param>
+        private void ToolStripMenuDashboard_Click(object sender, EventArgs e)
+        {
+            this.BootFormDashboard();
+        }
+
+        /// <summary>
+        /// Evento iniciado ao clicar no botão Reservar do menu
+        /// </summary>
+        /// <param name="sender">referência ao controlo/objeto que gerou o evento</param>
+        /// <param name="e">contém os dados do evento</param>
+        private void ToolStripMenuReservar_Click(object sender, EventArgs e)
+        {
+            this.BootFormReservar();
+        }
+
+        private void ToolStripMenuVeiculos_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void ToolStripMenuReservas_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void ToolStripMenuCarregarSaldo_Click(object sender, EventArgs e)
+        {
+
         }
 
         /// <summary>
@@ -270,16 +321,28 @@ namespace WinFormsApp1
         /// <param name="e">contém os dados do evento</param>
         private void ButtonProcurarReserva_Click(object sender, EventArgs e)
         {
-            //Dependendo de quais checkboxs estejam preenchidas dar update ao dataGridView com a lista referente
-            //Caso não esteja nenhum selecionado mostrar uma messageBox de aviso
-            if (checkBoxBicicleta.Checked && !checkBoxTrotinete.Checked)
-                UpdateDataGridViewState(veiculos.ListVeiculos(EstadoVeiculo.Ativo, TipoVeiculo.Bicicleta));
-            else if (!checkBoxBicicleta.Checked && checkBoxTrotinete.Checked)
-                UpdateDataGridViewState(veiculos.ListVeiculos(EstadoVeiculo.Ativo, TipoVeiculo.Trotinete));
-            else if (checkBoxBicicleta.Checked && checkBoxTrotinete.Checked)
-                UpdateDataGridViewState(veiculos.ListVeiculos(EstadoVeiculo.Ativo));
+            //dateTimePickerReservaDate e dateTimePickerReservaTime não podem ser de tempos passados
+            //Também têm de estar pelo menos 5 minutos a frente
+            if ((this.dateTimePickerReservaDate.Value.Date < DateTime.Now.Date) 
+                || (this.dateTimePickerReservaDate.Value.Date == DateTime.Now.Date 
+                && this.dateTimePickerReservaTime.Value.TimeOfDay <= DateTime.Now.AddMinutes(15).TimeOfDay))
+            {
+                MessageBox.Show("Escolha uma data correta!", "Atenção...", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                this.BootFormReservar();
+            }
             else
-                MessageBox.Show("Escolha pelo menos um tipo de veiculo!", "Atenção...", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+            {
+                //Dependendo de quais checkboxs estejam preenchidas dar update ao dataGridView com a lista referente
+                //Caso não esteja nenhum selecionado mostrar uma messageBox de aviso
+                if (checkBoxBicicleta.Checked && !checkBoxTrotinete.Checked)
+                    UpdateDataGridViewState(veiculos.ListVeiculos(EstadoVeiculo.Ativo, TipoVeiculo.Bicicleta));
+                else if (!checkBoxBicicleta.Checked && checkBoxTrotinete.Checked)
+                    UpdateDataGridViewState(veiculos.ListVeiculos(EstadoVeiculo.Ativo, TipoVeiculo.Trotinete));
+                else if (checkBoxBicicleta.Checked && checkBoxTrotinete.Checked)
+                    UpdateDataGridViewState(veiculos.ListVeiculos(EstadoVeiculo.Ativo));
+                else
+                    MessageBox.Show("Escolha pelo menos um tipo de veiculo!", "Atenção...", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+            }
         }
 
         /// <summary>
@@ -296,29 +359,41 @@ namespace WinFormsApp1
             //Tratar o evento de click nos butoes(Reservar) da tabela 
             if ((e.RowIndex >= 0) && (e.ColumnIndex == this.dataGridViewReserva.Columns["ButtonReserva"].Index))
             {
-                //MessageBox para confirmar ou não a reserva do veiculo
-                escolhaDoUtilizador = MessageBox.Show("Está prestes a confirmar a reserva deste veiculo.", "Atenção...", MessageBoxButtons.OKCancel, MessageBoxIcon.Information);
+                utilizador = SystemLogin.GetUserLogged();
+                Utilizador? u = utilizadores.FindUtilizadorUtilizador(utilizador.Id);
+                double custoReserva = Double.Parse(this.dataGridViewReserva["CustoReserva", e.RowIndex].Value.ToString());
 
-                //Se a escolha for OK na message box, reservar o veiculo escolhido
-                if (escolhaDoUtilizador == DialogResult.OK)
+                if (u.Saldo >= custoReserva)
                 {
-                    //Get Id acerca da reserva escolhida
-                    uint valorId = UInt32.Parse(this.dataGridViewReserva["Id", e.RowIndex].Value.ToString() ?? throw new Exception("Não consegue acessar o valor do index"));
+                    //MessageBox para confirmar ou não a reserva do veiculo
+                    escolhaDoUtilizador = MessageBox.Show("Está prestes a confirmar a reserva deste veiculo.", "Atenção...", MessageBoxButtons.OKCancel, MessageBoxIcon.Information);
+
+                    //Se a escolha for OK na message box, reservar o veiculo escolhido
+                    if (escolhaDoUtilizador == DialogResult.OK)
+                    {
+                        //Get Id acerca da reserva escolhida
+                        uint valorId = UInt32.Parse(this.dataGridViewReserva["Id", e.RowIndex].Value.ToString() ?? throw new Exception("Não consegue acessar o valor do index"));
                     
-                    // Reservar Veiculo escolhido
-                    Reserva novaReserva = 
-                        new(
-                            this.dateTimePickerReservaDate.Value.Date.Add(this.dateTimePickerReservaTime.Value.TimeOfDay), 
-                            Utilizadores.GetUserLogged().Id,
-                            valorId
-                            );
-                    reservas.AddReserva(novaReserva);
+                        // Reservar Veiculo escolhido
+                        Reserva novaReserva = 
+                            new(
+                                this.dateTimePickerReservaDate.Value.Date.Add(this.dateTimePickerReservaTime.Value.TimeOfDay),
+                                SystemLogin.GetUserLogged().Id,
+                                valorId
+                                );
+                        reservas.AddReserva(novaReserva);
 
-                    //Update no estado do veiculo reservado
-                    veiculoEscolhido = veiculos.FindVeiculo(valorId);
-                    veiculoEscolhido.EstadoVeiculo = EstadoVeiculo.Reservado;
+                        //Update no estado do veiculo reservado
+                        veiculoEscolhido = veiculos.FindVeiculo(valorId);
+                        veiculoEscolhido.EstadoVeiculo = EstadoVeiculo.Reservado;
+                        u.Saldo -= custoReserva;
 
-                    this.BootFormReservar();
+                        this.BootFormReservar();
+                    }
+                }
+                else
+                {
+                    MessageBox.Show("Não possui saldo suficiente para efetuar a reserva.", "Atenção...", MessageBoxButtons.OKCancel, MessageBoxIcon.Warning);
                 }
             }
 
@@ -345,17 +420,5 @@ namespace WinFormsApp1
                 }
             }
         }
-
-        
-        //////////// IMPORTANTE
-        ////veiculos.AddVeiculo(new Trotinete("BoltT2", 0.30, 0.95, 14));
-        ////bs.ResetBindings(true);
-        //////////// IMPORTANTE
-        //////////// IMPORTANTE
-        ////utilizadores.AddUtilizador(new Utilizador("teste@gmail.com", "teste", "teste", 123456789, DateTime.Now, "teste"));
-        ////bs.ResetBindings(true);
-        //////////// IMPORTANTE
-        ////UpdateDataGridViewState(utilizadores.ListUtilizadores());
-        //////////// IMPORTANTE
     }
 }

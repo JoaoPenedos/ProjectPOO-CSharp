@@ -6,16 +6,16 @@ using System.Threading.Tasks;
 
 namespace ProjectPOO.Models
 {
-    public class Funcionario : Pessoa
+    public class Funcionario : Pessoa, IPessoa
     {
-        private readonly int lastFuncionarioID = -1;
-
-        public Funcionario(string email, string nome, string password, int numeroTelemovel)
+        public Funcionario(string email, string nome, string password, int numeroTelemovel, DateTime dataEntrada)
              : base(email, nome, password, numeroTelemovel)
         {
-            this.FuncionarioID = lastFuncionarioID + 1;
+            this.DataEntrada = dataEntrada;
         }
 
-        public int FuncionarioID { get; set; }
+        public uint Id { get; set; }
+
+        public DateTime DataEntrada { get; set; }
     }
 }

@@ -10,16 +10,8 @@ namespace ProjectPOO.Data
 {
     public class Reservas
     {
-        List<Reserva> reservas = new List<Reserva>();
+        readonly List<Reserva> reservas = new();
         uint lastReservaID = 0;
-
-        //public Reservas(bool inicializeDummyData)
-        //{
-        //    this.AddReserva(new Reserva(DateTime.Now, 2, 3));
-        //    this.AddReserva(new Reserva(DateTime.Now, 1, 1));
-        //    this.AddReserva(new Reserva(DateTime.Now, 4, 9));
-        //    this.AddReserva(new Reserva(DateTime.Now, 4, 7));
-        //}
 
         public void AddReserva(Reserva novaReserva)
         {

@@ -10,23 +10,13 @@ namespace ProjectPOO.Data
 {
     public class Utilizadores
     {
-        public static List<Utilizador> utilizadores = new List<Utilizador>();
-        private static Utilizador? loggedUser = null;
+        public static List<IPessoa> utilizadores = new();
         uint lastUtilizadorID = 0;
-
-        
-        //public Utilizadores(bool inicializeDummyData)
-        //{
-        //    this.AddUtilizador(new Utilizador("manuelAntonio@gmail.com", "Manuel", "maNuel", 935462613, DateTime.Now, "Alvelos" ));
-        //    this.AddUtilizador(new Utilizador("ToneMaria@gmail.com", "tone", "tone", 945646513, DateTime.Now, "Brasiu" ));
-        //    this.AddUtilizador(new Utilizador("Manuela@gmail.com", "manuela", "prima", 945678977, DateTime.Now, "Alvelinhos" ));
-        //    this.AddUtilizador(new Utilizador("Emanuel@outlook.com", "Emanuel", "José", 123456789, DateTime.Now, "Mexico" ));
-        //}
 
         //methods
         public void AddUtilizador(Utilizador novoUtilizador)
         {
-            lastUtilizadorID = Utilizadores.utilizadores.Any() ? Utilizadores.utilizadores.Max(r => r.Id) : 0;
+            lastUtilizadorID = Utilizadores.utilizadores.Any() ? Utilizadores.utilizadores.Max(u => u.Id) : 0;
             novoUtilizador.Id = lastUtilizadorID + 1;
 
             //Utilizador cannot be null
@@ -39,6 +29,25 @@ namespace ProjectPOO.Data
 
             //add teacher
             Utilizadores.utilizadores.Add(novoUtilizador);
+        }
+
+        public void AddUtilizador(Funcionario novoFuncionario)
+        {
+            lastUtilizadorID = Utilizadores.utilizadores.Any() ? Utilizadores.utilizadores.Max(u => u.Id) : 0;
+            novoFuncionario.Id = lastUtilizadorID + 1;
+            //lastUtilizadorID = Utilizadores.utilizadores.Any() ? Utilizadores.utilizadores.Max(r => r.Id) : 0;
+            //novoFuncionario.Id = lastUtilizadorID + 1;
+
+            //Utilizador cannot be null
+            //if (novoUtilizador is null)
+            //    throw new TeacherIsNullException("School2.Data.Teachers.Add()");
+
+            //teacher must be unique
+            //if (this.teachers.Exists(t => t.Contribuinte.Equals(newTeacher.Contribuinte)))
+            //    throw new TeacherAlreadyExistsException("School2.Data.Teachers.Add()");
+
+            //add teacher
+            Utilizadores.utilizadores.Add(novoFuncionario);
         }
 
         public void UpdateUtilizador(Utilizador utilizador)
@@ -55,10 +64,30 @@ namespace ProjectPOO.Data
             //    throw new TeacherDoesNotExistsException("School2.Data.Teachers.Update()");
 
             //get index of the wanted teacher
-            index = Utilizadores.utilizadores.FindIndex(u => u.Email.Equals(utilizador.Email));
+            index = Utilizadores.utilizadores.FindIndex(u => u.Id.Equals(utilizador.Id));
 
             //update teachers with the new teacher
             Utilizadores.utilizadores[index] = utilizador;
+        }
+
+        public void UpdateUtilizador(Funcionario funcionario)
+        {
+            //variables
+            int index;
+
+            //teacher cannot be null
+            //if (teacher is null)
+            //    throw new TeacherIsNullException("School2.Data.Teachers.Update()");
+
+            //find if teacher exists in the list
+            //if (this.teachers.Exists(t => t.Contribuinte.Equals(teacher.Contribuinte)))
+            //    throw new TeacherDoesNotExistsException("School2.Data.Teachers.Update()");
+
+            //get index of the wanted teacher
+            index = Utilizadores.utilizadores.FindIndex(u => u.Id.Equals(funcionario.Id));
+
+            //update teachers with the new teacher
+            Utilizadores.utilizadores[index] = funcionario;
         }
 
         public void DeleteUtilizador(Utilizador utilizador)
@@ -75,7 +104,27 @@ namespace ProjectPOO.Data
             //throw new TeacherDoesNotExistsException("School2.Data.Teachers.Delete()");
 
             //get index of the wanted teacher
-            index = Utilizadores.utilizadores.FindIndex(u => u.Email.Equals(utilizador.Email));
+            index = Utilizadores.utilizadores.FindIndex(u => u.Id.Equals(utilizador.Id));
+
+            //remove the wanted teacher
+            Utilizadores.utilizadores.RemoveAt(index);
+        }
+
+        public void DeleteUtilizador(Funcionario funcionario)
+        {
+            //variables
+            int index;
+
+            //teacher cannot be null
+            //if (teacher is null)
+            //    throw new TeacherIsNullException("School2.Data.Teachers.Delete()");
+
+            //find if teacher exists in the list
+            //if (this.teachers.Exists(t => t.Contribuinte.Equals(teacher.Contribuinte)))
+            //throw new TeacherDoesNotExistsException("School2.Data.Teachers.Delete()");
+
+            //get index of the wanted teacher
+            index = Utilizadores.utilizadores.FindIndex(f => f.Id.Equals(funcionario.Id));
 
             //remove the wanted teacher
             Utilizadores.utilizadores.RemoveAt(index);
@@ -85,35 +134,18 @@ namespace ProjectPOO.Data
         /// Method to List all the utilizadores in the list
         /// </summary>
         /// <returns> return the teachers list </returns>
-        public List<Utilizador> ListUtilizadores() => Utilizadores.utilizadores;
+        public List<IPessoa> ListUtilizadores() => Utilizadores.utilizadores;
 
-        public Utilizador FindUtilizador(string nome) => Utilizadores.utilizadores.FirstOrDefault(u => u.Nome.Equals(nome)) ?? throw new Exception("Nome não existe na lista de utilizadores");
+        public List<Utilizador> ListOnlyUtilizadores() => Utilizadores.utilizadores.OfType<Utilizador>().ToList();
 
+        public List<Funcionario> ListOnlyFuncionarios() => Utilizadores.utilizadores.OfType<Funcionario>().ToList();
 
-        public static bool IsUserLogged() => loggedUser != null && loggedUser.Id != 0;
+        public Utilizador FindUtilizadorUtilizador(uint id) => Utilizadores.utilizadores.OfType<Utilizador>().FirstOrDefault(u => u.Id.Equals(id));
 
-        public static Utilizador? GetUserLogged() => loggedUser;
+        public Funcionario FindUtilizadorFuncionario(uint id) => Utilizadores.utilizadores.OfType<Funcionario>().FirstOrDefault(u => u.Id.Equals(id));
 
-        private static void SetUserLogged(Utilizador user) { loggedUser = user; }
-
-        public static void Logout() => loggedUser = null;
-
-        public static void SetDevMode(Utilizador u) => SetUserLogged(u);
-
-        public static bool IsAutenticacaoValida(string nome, string pass)
-        {
-            Utilizador? user = utilizadores.FirstOrDefault(u => u.Nome.Equals(nome) && u.Password.Equals(pass));
-
-            if (user == null)
-            {
-                throw new Exception("User does not exist");
-                return false;
-            }
-            else
-            {
-                SetUserLogged(user);
-                return true;
-            }
-        }
+        public IPessoa FindUtilizador(string nome) => Utilizadores.utilizadores.FirstOrDefault(u => u.Nome.Equals(nome)) ?? throw new Exception("Nome não existe na lista de utilizadores");
+        
+        public IPessoa FindUtilizador(string nome, string pass) => Utilizadores.utilizadores.FirstOrDefault(u => u.Nome.Equals(nome) && u.Password.Equals(pass)) ?? throw new Exception("Utilizador não existe na lista de utilizadores");
     }
 }

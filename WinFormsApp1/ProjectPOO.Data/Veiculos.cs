@@ -11,24 +11,10 @@ namespace ProjectPOO.Data
 {
     public class Veiculos
     {
-        List<IVeiculo> veiculos = new List<IVeiculo>();
+        readonly List<IVeiculo> veiculos = new();
         uint lastVeiculoID = 0;
         uint lastTrotineteID = 0;
         uint lastBicicletaID = 0;
-
-
-        //public Veiculos(bool inicializeDummyData)
-        //{
-        //    this.AddVeiculo(new Trotinete("BoltT4", 0.15, 1.15));
-        //    this.AddVeiculo(new Trotinete("BoltT4", 0.15, 1.15));
-        //    this.AddVeiculo(new Trotinete("BoltT2", 0.20, 1, 100));
-        //    this.AddVeiculo(new Bicicleta("BoltB4", 0.15, 1.15));
-        //    this.AddVeiculo(new Bicicleta("BoltB4", 0.15, 1.15, 35));
-        //    this.AddVeiculo(new Bicicleta("BoltB3", 0.10, 1));
-        //    this.AddVeiculo(new Trotinete("BoltT4", 0.15, 1.15));
-        //    this.AddVeiculo(new Bicicleta("BoltB4", 0.15, 1.15));
-        //    this.AddVeiculo(new Bicicleta("BoltB3", 0.10, 1));
-        //}
 
         public void AddVeiculo(Trotinete novaTrotinete) 
         {
@@ -165,15 +151,14 @@ namespace ProjectPOO.Data
         /// <summary>
         /// Method to List all the utilizadores in the list
         /// </summary>
-        /// <returns> return the teachers list </returns>
+        /// <returns> return the utilizadores list </returns>
         public List<IVeiculo> ListVeiculos() => this.veiculos;
 
         public List<IVeiculo> ListVeiculos(TipoVeiculo tipo) => this.veiculos.Where(v => v.TipoVeiculo.Equals(tipo)).ToList();
-
+            
         public List<IVeiculo> ListVeiculos(EstadoVeiculo estado) => this.veiculos.Where(v => v.EstadoVeiculo.Equals(estado)).ToList();
 
         public List<IVeiculo> ListVeiculos(EstadoVeiculo estado, TipoVeiculo tipo) => this.veiculos.Where(v => v.EstadoVeiculo.Equals(estado) && v.TipoVeiculo.Equals(tipo)).ToList();
-
 
         public IVeiculo FindVeiculo(uint id) => this.veiculos.FirstOrDefault(v => v.Id.Equals(id)) ?? throw new Exception("Id não existe na lista de veiculos");
 

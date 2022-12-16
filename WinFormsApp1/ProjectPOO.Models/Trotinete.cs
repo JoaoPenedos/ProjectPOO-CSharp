@@ -47,8 +47,6 @@ namespace ProjectPOO.Models
 
         public TipoVeiculo TipoVeiculo { get; set; }
 
-
-
         public void UpdateKilometros(int newKilometrosTraveled) => this.Kilometros += newKilometrosTraveled;
 
         public void SetDesignacao(uint lastTrotineteID) => this.Designacao = "Trotinete_N" + lastTrotineteID.ToString("000");

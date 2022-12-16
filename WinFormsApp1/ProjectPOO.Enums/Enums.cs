@@ -11,9 +11,9 @@ namespace ProjectPOO.Enums
         NaoUsada, UsadaPaga, UsadaNaoPaga, EmEspera
     }
 
-    public enum EstadoVeiculo
+    public enum EstadoPagamento
     {
-        Avariado, Inativo, SemBateria, Ativo, Reservado
+        Pago, NaoPago
     }
 
     public enum EstadoReserva
@@ -21,9 +21,9 @@ namespace ProjectPOO.Enums
         EmEspera, Cancelada, Utilizada, NaoValidade
     }
 
-    public enum EstadoPagamento
+    public enum EstadoVeiculo
     {
-        Pago, NaoPago
+        Avariado, Inativo, SemBateria, Ativo, Reservado
     }
 
     public enum TipoVeiculo

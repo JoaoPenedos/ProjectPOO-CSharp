@@ -33,8 +33,12 @@
             this.toolStripMenuLogout = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripMenuDasboard = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripMenuReservar = new System.Windows.Forms.ToolStripMenuItem();
+            this.toolStripMenuVeiculos = new System.Windows.Forms.ToolStripMenuItem();
+            this.toolStripMenuReservas = new System.Windows.Forms.ToolStripMenuItem();
+            this.toolStripMenuCarregarSaldo = new System.Windows.Forms.ToolStripMenuItem();
             this.statusStrip1 = new System.Windows.Forms.StatusStrip();
-            this.toolStripStatusLabel1 = new System.Windows.Forms.ToolStripStatusLabel();
+            this.toolStripStatusLabelNome = new System.Windows.Forms.ToolStripStatusLabel();
+            this.toolStripStatusLabelSaldo = new System.Windows.Forms.ToolStripStatusLabel();
             this.pictureBoxBicicleta = new System.Windows.Forms.PictureBox();
             this.pictureBoxTrotinete = new System.Windows.Forms.PictureBox();
             this.checkBoxBicicleta = new System.Windows.Forms.CheckBox();
@@ -46,6 +50,7 @@
             this.dataGridViewReserva = new System.Windows.Forms.DataGridView();
             this.ButtonReserva = new System.Windows.Forms.DataGridViewButtonColumn();
             this.ButtonCancelar = new System.Windows.Forms.DataGridViewButtonColumn();
+            this.labelCountReservas = new System.Windows.Forms.Label();
             this.menuStrip1.SuspendLayout();
             this.statusStrip1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBoxBicicleta)).BeginInit();
@@ -61,7 +66,10 @@
             this.toolStripMenuLogin,
             this.toolStripMenuLogout,
             this.toolStripMenuDasboard,
-            this.toolStripMenuReservar});
+            this.toolStripMenuReservar,
+            this.toolStripMenuVeiculos,
+            this.toolStripMenuReservas,
+            this.toolStripMenuCarregarSaldo});
             this.menuStrip1.Location = new System.Drawing.Point(0, 0);
             this.menuStrip1.Name = "menuStrip1";
             this.menuStrip1.Size = new System.Drawing.Size(1108, 28);
@@ -97,22 +105,50 @@
             this.toolStripMenuReservar.Text = "Reservar";
             this.toolStripMenuReservar.Click += new System.EventHandler(this.ToolStripMenuReservar_Click);
             // 
+            // toolStripMenuVeiculos
+            // 
+            this.toolStripMenuVeiculos.Name = "toolStripMenuVeiculos";
+            this.toolStripMenuVeiculos.Size = new System.Drawing.Size(77, 24);
+            this.toolStripMenuVeiculos.Text = "Veiculos";
+            this.toolStripMenuVeiculos.Click += new System.EventHandler(this.ToolStripMenuVeiculos_Click);
+            // 
+            // toolStripMenuReservas
+            // 
+            this.toolStripMenuReservas.Name = "toolStripMenuReservas";
+            this.toolStripMenuReservas.Size = new System.Drawing.Size(80, 24);
+            this.toolStripMenuReservas.Text = "Reservas";
+            this.toolStripMenuReservas.Click += new System.EventHandler(this.ToolStripMenuReservas_Click);
+            // 
+            // toolStripMenuCarregarSaldo
+            // 
+            this.toolStripMenuCarregarSaldo.Name = "toolStripMenuCarregarSaldo";
+            this.toolStripMenuCarregarSaldo.Size = new System.Drawing.Size(122, 24);
+            this.toolStripMenuCarregarSaldo.Text = "Carregar Saldo";
+            this.toolStripMenuCarregarSaldo.Click += new System.EventHandler(this.ToolStripMenuCarregarSaldo_Click);
+            // 
             // statusStrip1
             // 
             this.statusStrip1.ImageScalingSize = new System.Drawing.Size(20, 20);
             this.statusStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.toolStripStatusLabel1});
+            this.toolStripStatusLabelNome,
+            this.toolStripStatusLabelSaldo});
             this.statusStrip1.Location = new System.Drawing.Point(0, 526);
             this.statusStrip1.Name = "statusStrip1";
             this.statusStrip1.Size = new System.Drawing.Size(1108, 26);
             this.statusStrip1.TabIndex = 4;
             this.statusStrip1.Text = "statusStrip1";
             // 
-            // toolStripStatusLabel1
+            // toolStripStatusLabelNome
             // 
-            this.toolStripStatusLabel1.Name = "toolStripStatusLabel1";
-            this.toolStripStatusLabel1.Size = new System.Drawing.Size(151, 20);
-            this.toolStripStatusLabel1.Text = "toolStripStatusLabel1";
+            this.toolStripStatusLabelNome.Name = "toolStripStatusLabelNome";
+            this.toolStripStatusLabelNome.Size = new System.Drawing.Size(184, 20);
+            this.toolStripStatusLabelNome.Text = "toolStripStatusLabelNome";
+            // 
+            // toolStripStatusLabelSaldo
+            // 
+            this.toolStripStatusLabelSaldo.Name = "toolStripStatusLabelSaldo";
+            this.toolStripStatusLabelSaldo.Size = new System.Drawing.Size(181, 20);
+            this.toolStripStatusLabelSaldo.Text = "toolStripStatusLabelSaldo";
             // 
             // pictureBoxBicicleta
             // 
@@ -209,7 +245,7 @@
             // 
             // ButtonReserva
             // 
-            this.ButtonReserva.HeaderText = "Reservar";
+            this.ButtonReserva.HeaderText = "";
             this.ButtonReserva.MinimumWidth = 6;
             this.ButtonReserva.Name = "ButtonReserva";
             this.ButtonReserva.ReadOnly = true;
@@ -220,7 +256,7 @@
             // 
             // ButtonCancelar
             // 
-            this.ButtonCancelar.HeaderText = "Cancelar";
+            this.ButtonCancelar.HeaderText = "";
             this.ButtonCancelar.MinimumWidth = 6;
             this.ButtonCancelar.Name = "ButtonCancelar";
             this.ButtonCancelar.ReadOnly = true;
@@ -229,12 +265,23 @@
             this.ButtonCancelar.UseColumnTextForButtonValue = true;
             this.ButtonCancelar.Width = 125;
             // 
+            // labelCountReservas
+            // 
+            this.labelCountReservas.AutoSize = true;
+            this.labelCountReservas.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            this.labelCountReservas.Location = new System.Drawing.Point(36, 80);
+            this.labelCountReservas.Name = "labelCountReservas";
+            this.labelCountReservas.Size = new System.Drawing.Size(65, 28);
+            this.labelCountReservas.TabIndex = 13;
+            this.labelCountReservas.Text = "label1";
+            // 
             // FormMain
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 20F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.SystemColors.ControlLight;
             this.ClientSize = new System.Drawing.Size(1108, 552);
+            this.Controls.Add(this.labelCountReservas);
             this.Controls.Add(this.dataGridViewReserva);
             this.Controls.Add(this.buttonProcurarReserva);
             this.Controls.Add(this.dateTimePickerReservaDate);
@@ -270,7 +317,7 @@
         private ToolStripMenuItem toolStripMenuLogin;
         private ToolStripMenuItem toolStripMenuLogout;
         private StatusStrip statusStrip1;
-        private ToolStripStatusLabel toolStripStatusLabel1;
+        private ToolStripStatusLabel toolStripStatusLabelNome;
         private PictureBox pictureBoxBicicleta;
         private PictureBox pictureBoxTrotinete;
         private CheckBox checkBoxBicicleta;
@@ -282,5 +329,10 @@
         private DataGridView dataGridViewReserva;
         private DataGridViewButtonColumn ButtonReserva;
         private DataGridViewButtonColumn ButtonCancelar;
+        private ToolStripMenuItem toolStripMenuVeiculos;
+        private ToolStripMenuItem toolStripMenuReservas;
+        private ToolStripMenuItem toolStripMenuCarregarSaldo;
+        private Label labelCountReservas;
+        private ToolStripStatusLabel toolStripStatusLabelSaldo;
     }
 }
