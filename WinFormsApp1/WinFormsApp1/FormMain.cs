@@ -38,6 +38,7 @@ namespace WinFormsApp1
             utilizadores.AddUtilizador(new Utilizador("Manuela@gmail.com", "manuela", "prima", 945678977, DateTime.Now, "Alvelinhos", 0.34));
             utilizadores.AddUtilizador(new Utilizador("Emanuel@outlook.com", "Emanuel", "José", 123456789, DateTime.Now, "Mexico", 5.1));
             utilizadores.AddUtilizador(new Funcionario("ferreirasantos@gmail.com", "Ferreira", "Santos", 937587613, DateTime.Now));
+            utilizadores.AddUtilizador(new Funcionario("tester@gmail.com", "1", "1", 937342313, DateTime.Now));
 
             //Dummy data para a lista de veiculos
             veiculos.AddVeiculo(new Trotinete("BoltT4", 0.15, 1.15));
@@ -83,6 +84,7 @@ namespace WinFormsApp1
             this.dataGridViewReserva.Columns["ButtonReserva"].Visible = false;
             this.dataGridViewReserva.Columns["ButtonCancelar"].Visible = true;
 
+            this.labelCountReservas.Visible = false;
             this.comboBoxPosto.Visible = false;
             this.pictureBoxBicicleta.Visible = false;
             this.pictureBoxTrotinete.Visible = false;
@@ -93,15 +95,12 @@ namespace WinFormsApp1
             this.checkBoxTrotinete.Visible = false;
             this.toolStripStatusLabelSaldo.Visible = false;
 
-            this.labelCountReservas.Visible = existeUtilizador;
             this.toolStripMenuLogin.Visible = !existeUtilizador;
             this.toolStripMenuLogout.Visible = existeUtilizador;
             this.toolStripMenuDasboard.Visible = existeUtilizador;
             this.toolStripMenuReservar.Visible = existeUtilizador;
             this.toolStripMenuVeiculos.Visible = existeUtilizador;
-            this.toolStripMenuReservas.Visible = existeUtilizador;
             this.toolStripMenuCarregarSaldo.Visible = existeUtilizador;
-            this.toolStripStatusLabelNome.Visible = existeUtilizador;
 
             //se existir utilizador logado
             if (existeUtilizador)
@@ -116,12 +115,13 @@ namespace WinFormsApp1
                     this.toolStripMenuDasboard.Visible = false;
                     this.toolStripMenuReservar.Visible = false;
                     this.toolStripMenuVeiculos.Visible = existeUtilizador;
-                    this.toolStripMenuReservas.Visible = existeUtilizador;
                     this.toolStripMenuCarregarSaldo.Visible = false;
                 }
                 else
                 {
+                    this.labelCountReservas.Visible = existeUtilizador;
                     this.toolStripStatusLabelSaldo.Visible = existeUtilizador;
+
                     Utilizador? u = utilizadores.FindUtilizadorUtilizador(utilizador.Id);
                     this.toolStripStatusLabelSaldo.Text = Math.Round(u.Saldo, 2).ToString() + "€";
 
@@ -140,7 +140,6 @@ namespace WinFormsApp1
                     this.toolStripMenuDasboard.Visible = existeUtilizador;
                     this.toolStripMenuReservar.Visible = existeUtilizador;
                     this.toolStripMenuVeiculos.Visible = false;
-                    this.toolStripMenuReservas.Visible = false;
                     this.toolStripMenuCarregarSaldo.Visible = existeUtilizador;
                 }
             }
@@ -304,14 +303,16 @@ namespace WinFormsApp1
 
         }
 
-        private void ToolStripMenuReservas_Click(object sender, EventArgs e)
-        {
-
-        }
-
         private void ToolStripMenuCarregarSaldo_Click(object sender, EventArgs e)
         {
-
+            // TODO: Melhorar o sistema de carregar saldo (atual apenas serve para testes)
+            utilizador = SystemLogin.GetUserLogged();
+            Utilizador? u = utilizadores.FindUtilizadorUtilizador(utilizador.Id);
+            u.Saldo += 5;
+            if (this.labelCountReservas.Visible)
+                BootFormDashboard();
+            else
+                BootFormReservar();
         }
 
         /// <summary>

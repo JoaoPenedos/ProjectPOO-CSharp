@@ -34,7 +34,6 @@
             this.toolStripMenuDasboard = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripMenuReservar = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripMenuVeiculos = new System.Windows.Forms.ToolStripMenuItem();
-            this.toolStripMenuReservas = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripMenuCarregarSaldo = new System.Windows.Forms.ToolStripMenuItem();
             this.statusStrip1 = new System.Windows.Forms.StatusStrip();
             this.toolStripStatusLabelNome = new System.Windows.Forms.ToolStripStatusLabel();
@@ -68,7 +67,6 @@
             this.toolStripMenuDasboard,
             this.toolStripMenuReservar,
             this.toolStripMenuVeiculos,
-            this.toolStripMenuReservas,
             this.toolStripMenuCarregarSaldo});
             this.menuStrip1.Location = new System.Drawing.Point(0, 0);
             this.menuStrip1.Name = "menuStrip1";
@@ -111,13 +109,6 @@
             this.toolStripMenuVeiculos.Size = new System.Drawing.Size(77, 24);
             this.toolStripMenuVeiculos.Text = "Veiculos";
             this.toolStripMenuVeiculos.Click += new System.EventHandler(this.ToolStripMenuVeiculos_Click);
-            // 
-            // toolStripMenuReservas
-            // 
-            this.toolStripMenuReservas.Name = "toolStripMenuReservas";
-            this.toolStripMenuReservas.Size = new System.Drawing.Size(80, 24);
-            this.toolStripMenuReservas.Text = "Reservas";
-            this.toolStripMenuReservas.Click += new System.EventHandler(this.ToolStripMenuReservas_Click);
             // 
             // toolStripMenuCarregarSaldo
             // 
@@ -330,7 +321,6 @@
         private DataGridViewButtonColumn ButtonReserva;
         private DataGridViewButtonColumn ButtonCancelar;
         private ToolStripMenuItem toolStripMenuVeiculos;
-        private ToolStripMenuItem toolStripMenuReservas;
         private ToolStripMenuItem toolStripMenuCarregarSaldo;
         private Label labelCountReservas;
         private ToolStripStatusLabel toolStripStatusLabelSaldo;

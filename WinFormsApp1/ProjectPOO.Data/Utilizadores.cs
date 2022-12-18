@@ -136,16 +136,16 @@ namespace ProjectPOO.Data
         /// <returns> return the teachers list </returns>
         public List<IPessoa> ListUtilizadores() => Utilizadores.utilizadores;
 
-        public List<Utilizador> ListOnlyUtilizadores() => Utilizadores.utilizadores.OfType<Utilizador>().ToList();
+        public List<Utilizador>? ListOnlyUtilizadores() => Utilizadores.utilizadores.OfType<Utilizador>().ToList();
 
-        public List<Funcionario> ListOnlyFuncionarios() => Utilizadores.utilizadores.OfType<Funcionario>().ToList();
+        public List<Funcionario>? ListOnlyFuncionarios() => Utilizadores.utilizadores.OfType<Funcionario>().ToList();
 
-        public Utilizador FindUtilizadorUtilizador(uint id) => Utilizadores.utilizadores.OfType<Utilizador>().FirstOrDefault(u => u.Id.Equals(id));
+        public Utilizador? FindUtilizadorUtilizador(uint id) => Utilizadores.utilizadores.OfType<Utilizador>().FirstOrDefault(u => u.Id.Equals(id));
 
-        public Funcionario FindUtilizadorFuncionario(uint id) => Utilizadores.utilizadores.OfType<Funcionario>().FirstOrDefault(u => u.Id.Equals(id));
+        public Funcionario? FindUtilizadorFuncionario(uint id) => Utilizadores.utilizadores.OfType<Funcionario>().FirstOrDefault(u => u.Id.Equals(id));
 
-        public IPessoa FindUtilizador(string nome) => Utilizadores.utilizadores.FirstOrDefault(u => u.Nome.Equals(nome)) ?? throw new Exception("Nome não existe na lista de utilizadores");
+        public IPessoa? FindUtilizador(string nome) => Utilizadores.utilizadores.FirstOrDefault(u => u.Nome.Equals(nome));
         
-        public IPessoa FindUtilizador(string nome, string pass) => Utilizadores.utilizadores.FirstOrDefault(u => u.Nome.Equals(nome) && u.Password.Equals(pass)) ?? throw new Exception("Utilizador não existe na lista de utilizadores");
+        public IPessoa? FindUtilizador(string nome, string pass) => Utilizadores.utilizadores.FirstOrDefault(u => u.Nome.Equals(nome) && u.Password.Equals(pass));
     }
 }
