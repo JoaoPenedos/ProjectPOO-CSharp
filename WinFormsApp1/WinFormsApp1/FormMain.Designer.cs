@@ -34,6 +34,8 @@
             this.toolStripMenuDasboard = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripMenuReservar = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripMenuVeiculos = new System.Windows.Forms.ToolStripMenuItem();
+            this.listaDeVeiculosToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.adicionarVeiculoToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripMenuCarregarSaldo = new System.Windows.Forms.ToolStripMenuItem();
             this.statusStrip1 = new System.Windows.Forms.StatusStrip();
             this.toolStripStatusLabelNome = new System.Windows.Forms.ToolStripStatusLabel();
@@ -50,6 +52,7 @@
             this.ButtonReserva = new System.Windows.Forms.DataGridViewButtonColumn();
             this.ButtonCancelar = new System.Windows.Forms.DataGridViewButtonColumn();
             this.labelCountReservas = new System.Windows.Forms.Label();
+            this.labelFuncionario = new System.Windows.Forms.Label();
             this.menuStrip1.SuspendLayout();
             this.statusStrip1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBoxBicicleta)).BeginInit();
@@ -70,7 +73,7 @@
             this.toolStripMenuCarregarSaldo});
             this.menuStrip1.Location = new System.Drawing.Point(0, 0);
             this.menuStrip1.Name = "menuStrip1";
-            this.menuStrip1.Size = new System.Drawing.Size(1108, 28);
+            this.menuStrip1.Size = new System.Drawing.Size(1253, 28);
             this.menuStrip1.TabIndex = 2;
             this.menuStrip1.Text = "menuStrip1";
             // 
@@ -105,10 +108,26 @@
             // 
             // toolStripMenuVeiculos
             // 
+            this.toolStripMenuVeiculos.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.listaDeVeiculosToolStripMenuItem,
+            this.adicionarVeiculoToolStripMenuItem});
             this.toolStripMenuVeiculos.Name = "toolStripMenuVeiculos";
             this.toolStripMenuVeiculos.Size = new System.Drawing.Size(77, 24);
             this.toolStripMenuVeiculos.Text = "Veiculos";
-            this.toolStripMenuVeiculos.Click += new System.EventHandler(this.ToolStripMenuVeiculos_Click);
+            // 
+            // listaDeVeiculosToolStripMenuItem
+            // 
+            this.listaDeVeiculosToolStripMenuItem.Name = "listaDeVeiculosToolStripMenuItem";
+            this.listaDeVeiculosToolStripMenuItem.Size = new System.Drawing.Size(208, 26);
+            this.listaDeVeiculosToolStripMenuItem.Text = "Lista de Veiculos";
+            this.listaDeVeiculosToolStripMenuItem.Click += new System.EventHandler(this.ToolStripMenuListaDeVeiculos_Click);
+            // 
+            // adicionarVeiculoToolStripMenuItem
+            // 
+            this.adicionarVeiculoToolStripMenuItem.Name = "adicionarVeiculoToolStripMenuItem";
+            this.adicionarVeiculoToolStripMenuItem.Size = new System.Drawing.Size(208, 26);
+            this.adicionarVeiculoToolStripMenuItem.Text = "Adicionar Veiculo";
+            this.adicionarVeiculoToolStripMenuItem.Click += new System.EventHandler(this.ToolStripMenuAdicionarVeiculo_Click);
             // 
             // toolStripMenuCarregarSaldo
             // 
@@ -123,9 +142,9 @@
             this.statusStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.toolStripStatusLabelNome,
             this.toolStripStatusLabelSaldo});
-            this.statusStrip1.Location = new System.Drawing.Point(0, 526);
+            this.statusStrip1.Location = new System.Drawing.Point(0, 547);
             this.statusStrip1.Name = "statusStrip1";
-            this.statusStrip1.Size = new System.Drawing.Size(1108, 26);
+            this.statusStrip1.Size = new System.Drawing.Size(1253, 26);
             this.statusStrip1.TabIndex = 4;
             this.statusStrip1.Text = "statusStrip1";
             // 
@@ -221,6 +240,8 @@
             // 
             this.dataGridViewReserva.AllowUserToAddRows = false;
             this.dataGridViewReserva.AllowUserToDeleteRows = false;
+            this.dataGridViewReserva.AllowUserToResizeColumns = false;
+            this.dataGridViewReserva.AllowUserToResizeRows = false;
             this.dataGridViewReserva.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dataGridViewReserva.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
             this.ButtonReserva,
@@ -266,12 +287,23 @@
             this.labelCountReservas.TabIndex = 13;
             this.labelCountReservas.Text = "label1";
             // 
+            // labelFuncionario
+            // 
+            this.labelFuncionario.AutoSize = true;
+            this.labelFuncionario.Font = new System.Drawing.Font("Segoe UI", 15F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            this.labelFuncionario.Location = new System.Drawing.Point(35, 100);
+            this.labelFuncionario.Name = "labelFuncionario";
+            this.labelFuncionario.Size = new System.Drawing.Size(81, 35);
+            this.labelFuncionario.TabIndex = 14;
+            this.labelFuncionario.Text = "label1";
+            // 
             // FormMain
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 20F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.SystemColors.ControlLight;
-            this.ClientSize = new System.Drawing.Size(1108, 552);
+            this.ClientSize = new System.Drawing.Size(1253, 573);
+            this.Controls.Add(this.labelFuncionario);
             this.Controls.Add(this.labelCountReservas);
             this.Controls.Add(this.dataGridViewReserva);
             this.Controls.Add(this.buttonProcurarReserva);
@@ -284,7 +316,10 @@
             this.Controls.Add(this.pictureBoxBicicleta);
             this.Controls.Add(this.statusStrip1);
             this.Controls.Add(this.menuStrip1);
+            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
             this.MainMenuStrip = this.menuStrip1;
+            this.MaximizeBox = false;
+            this.MinimizeBox = false;
             this.Name = "FormMain";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "FormMain";
@@ -324,5 +359,8 @@
         private ToolStripMenuItem toolStripMenuCarregarSaldo;
         private Label labelCountReservas;
         private ToolStripStatusLabel toolStripStatusLabelSaldo;
+        private Label labelFuncionario;
+        private ToolStripMenuItem adicionarVeiculoToolStripMenuItem;
+        private ToolStripMenuItem listaDeVeiculosToolStripMenuItem;
     }
 }

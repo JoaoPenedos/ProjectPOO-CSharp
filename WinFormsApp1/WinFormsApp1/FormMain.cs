@@ -85,6 +85,7 @@ namespace WinFormsApp1
             this.dataGridViewReserva.Columns["ButtonCancelar"].Visible = true;
 
             this.labelCountReservas.Visible = false;
+            this.labelFuncionario.Visible = false;
             this.comboBoxPosto.Visible = false;
             this.pictureBoxBicicleta.Visible = false;
             this.pictureBoxTrotinete.Visible = false;
@@ -112,7 +113,11 @@ namespace WinFormsApp1
                 
                 if (utilizador is Funcionario)
                 {
-                    this.toolStripMenuDasboard.Visible = false;
+                    Funcionario? f = utilizadores.FindUtilizadorTipoFuncionario(utilizador.Id);
+                    this.labelFuncionario.Visible = existeUtilizador;
+                    this.labelFuncionario.Text = "Bem vindo Sr(a) " + f.Nome;
+
+                    this.toolStripMenuDasboard.Visible = existeUtilizador;
                     this.toolStripMenuReservar.Visible = false;
                     this.toolStripMenuVeiculos.Visible = existeUtilizador;
                     this.toolStripMenuCarregarSaldo.Visible = false;
@@ -122,7 +127,7 @@ namespace WinFormsApp1
                     this.labelCountReservas.Visible = existeUtilizador;
                     this.toolStripStatusLabelSaldo.Visible = existeUtilizador;
 
-                    Utilizador? u = utilizadores.FindUtilizadorUtilizador(utilizador.Id);
+                    Utilizador? u = utilizadores.FindUtilizadorTipoUtilizador(utilizador.Id);
                     this.toolStripStatusLabelSaldo.Text = Math.Round(u.Saldo, 2).ToString() + "€";
 
                     //se ouver revervas para listar, lista as mesmas, senão esconde os headers do dataGridView
@@ -152,6 +157,7 @@ namespace WinFormsApp1
         {
             //verificar se existe algum utilizador logado
             existeUtilizador = SystemLogin.IsUserLogged();
+            utilizador = SystemLogin.GetUserLogged();
 
             //set estado dos diferentes Forms no BootFormReserva
             this.dataGridViewReserva.ColumnHeadersVisible = true;
@@ -171,8 +177,31 @@ namespace WinFormsApp1
             this.checkBoxBicicleta.Checked = false;
             this.checkBoxTrotinete.Checked = false;
 
-            Utilizador? u = utilizadores.FindUtilizadorUtilizador(utilizador.Id);
+            Utilizador? u = utilizadores.FindUtilizadorTipoUtilizador(utilizador.Id);
             this.toolStripStatusLabelSaldo.Text = Math.Round(u.Saldo, 2).ToString() + "€";
+        }
+
+        private void BootFormVeiculos()
+        {
+            //verificar se existe algum utilizador logado
+            existeUtilizador = SystemLogin.IsUserLogged();
+
+            if (existeUtilizador)
+            {
+                this.dataGridViewReserva.Visible = true;
+                
+                if (veiculos.ListVeiculos().Any())
+                {
+                    this.labelFuncionario.Text = "Existem " + veiculos.ListVeiculos().Count() + "\nna lista de veiculos";
+                    UpdateDataGridViewState(veiculos.ListVeiculos());
+                }
+                else
+                {
+                    this.labelFuncionario.Text = "Não existem veiculos neste momento";
+                    this.dataGridViewReserva.ColumnHeadersVisible = false;
+                    this.dataGridViewReserva.Visible = false;
+                }
+            }
         }
 
         /// <summary>
@@ -182,6 +211,8 @@ namespace WinFormsApp1
         /// <param name="list">Nome da lista recebida</param>
         private void UpdateDataGridViewState<T>(IList<T> list)
         {
+            utilizador = SystemLogin.GetUserLogged();
+
             //alterar o estado Visible para true caso tenha sido escondida antes
             this.dataGridViewReserva.Visible = true;
             //limpar o DataSource do dataGridView 
@@ -193,12 +224,20 @@ namespace WinFormsApp1
             this.dataGridViewReserva.DataSource = bs;
 
             //Se a lista for do tipo IVeiculo esconder certas colunas desnecessárias
-            if (typeof(T) == typeof(IVeiculo))
+            if (typeof(T) == typeof(IVeiculo) && utilizador is Utilizador)
             {
                 this.dataGridViewReserva.Columns["ButtonReserva"].Visible = true;
                 this.dataGridViewReserva.Columns["ButtonCancelar"].Visible = false;
                 this.dataGridViewReserva.Columns["EstadoVeiculo"].Visible = false;
                 this.dataGridViewReserva.Columns["Kilometros"].Visible = false;
+                this.dataGridViewReserva.Columns["Id"].Visible = false;
+            }
+            else if (utilizador is Funcionario)
+            {
+                this.dataGridViewReserva.Columns["ButtonReserva"].Visible = false;
+                this.dataGridViewReserva.Columns["ButtonCancelar"].Visible = false;
+                this.dataGridViewReserva.Columns["EstadoVeiculo"].Visible = true;
+                this.dataGridViewReserva.Columns["Kilometros"].Visible = true;
                 this.dataGridViewReserva.Columns["Id"].Visible = false;
             }
 
@@ -249,7 +288,7 @@ namespace WinFormsApp1
         /// <param name="e">contém os dados do evento</param>
         private void FormMain_Load(object sender, EventArgs e)
         {
-            SystemLogin.SetDevMode(utilizadores.ListUtilizadores().ElementAt(2));
+            SystemLogin.SetDevMode(utilizadores.ListUtilizadores().ElementAt(4));
             this.BootFormDashboard();
         }
 
@@ -261,8 +300,8 @@ namespace WinFormsApp1
         private void ToolStripMenuLogin_Click(object sender, EventArgs e)
         {
             //iniciar e mostrar o Formlogin ao utilizador
-            FormLogin f = new();
-            f.ShowDialog();
+            FormLogin formLogin = new();
+            formLogin.ShowDialog();
             this.BootFormDashboard();
         }
 
@@ -298,16 +337,24 @@ namespace WinFormsApp1
             this.BootFormReservar();
         }
 
-        private void ToolStripMenuVeiculos_Click(object sender, EventArgs e)
+        private void ToolStripMenuListaDeVeiculos_Click(object sender, EventArgs e)
         {
+            this.BootFormVeiculos();
+        }
 
+        private void ToolStripMenuAdicionarVeiculo_Click(object sender, EventArgs e)
+        {
+            //iniciar e mostrar o FormAddVeiculo ao utilizador
+            FormAddVeiculo formAddVeiculo = new();
+            formAddVeiculo.ShowDialog();
+            this.BootFormVeiculos();
         }
 
         private void ToolStripMenuCarregarSaldo_Click(object sender, EventArgs e)
         {
             // TODO: Melhorar o sistema de carregar saldo (atual apenas serve para testes)
             utilizador = SystemLogin.GetUserLogged();
-            Utilizador? u = utilizadores.FindUtilizadorUtilizador(utilizador.Id);
+            Utilizador? u = utilizadores.FindUtilizadorTipoUtilizador(utilizador.Id);
             u.Saldo += 5;
             if (this.labelCountReservas.Visible)
                 BootFormDashboard();
@@ -361,7 +408,7 @@ namespace WinFormsApp1
             if ((e.RowIndex >= 0) && (e.ColumnIndex == this.dataGridViewReserva.Columns["ButtonReserva"].Index))
             {
                 utilizador = SystemLogin.GetUserLogged();
-                Utilizador? u = utilizadores.FindUtilizadorUtilizador(utilizador.Id);
+                Utilizador? u = utilizadores.FindUtilizadorTipoUtilizador(utilizador.Id);
                 double custoReserva = Double.Parse(this.dataGridViewReserva["CustoReserva", e.RowIndex].Value.ToString());
 
                 if (u.Saldo >= custoReserva)
@@ -376,13 +423,10 @@ namespace WinFormsApp1
                         uint valorId = UInt32.Parse(this.dataGridViewReserva["Id", e.RowIndex].Value.ToString() ?? throw new Exception("Não consegue acessar o valor do index"));
                     
                         // Reservar Veiculo escolhido
-                        Reserva novaReserva = 
-                            new(
-                                this.dateTimePickerReservaDate.Value.Date.Add(this.dateTimePickerReservaTime.Value.TimeOfDay),
-                                SystemLogin.GetUserLogged().Id,
-                                valorId
-                                );
-                        reservas.AddReserva(novaReserva);
+                        reservas.AddReserva(new Reserva (
+                            this.dateTimePickerReservaDate.Value.Date.Add(this.dateTimePickerReservaTime.Value.TimeOfDay),
+                            SystemLogin.GetUserLogged().Id,
+                            valorId));
 
                         //Update no estado do veiculo reservado
                         veiculoEscolhido = veiculos.FindVeiculo(valorId);
@@ -407,16 +451,24 @@ namespace WinFormsApp1
                 //Se a escolha for OK na message box, cancelar a reserva escolhida
                 if (escolhaDoUtilizador == DialogResult.OK)
                 {
-                    //Get Id do utilizador e do veiculo acerca da reserva escolhida
-                    string valorUtilizador = this.dataGridViewReserva["Nome", e.RowIndex].Value.ToString() ?? throw new Exception("Não consegue acessar o valor do nome");
-                    string valorVeiculo = this.dataGridViewReserva["VeiculoDesignacao", e.RowIndex].Value.ToString() ?? throw new Exception("Não consegue acessar o valor do veiculoDesignacao");
-
-                    // Cancelar reserva do Veiculo escolhido
-                    utilizadorEscolhido = utilizadores.FindUtilizador(valorUtilizador);
-                    veiculoEscolhido = veiculos.FindVeiculo(valorVeiculo);
-                    reservaEscolhida = reservas.FindReserva(utilizadorEscolhido.Id, veiculoEscolhido.Id);
-                    reservaEscolhida.EstadoReserva = EstadoReserva.Cancelada;
-                    veiculoEscolhido.EstadoVeiculo = EstadoVeiculo.Ativo;
+                    try
+                    {
+                        //Get Id do utilizador e do veiculo acerca da reserva escolhida
+                        string valorUtilizador = this.dataGridViewReserva["Nome", e.RowIndex].Value.ToString() ?? throw new Exception("Não consegue acessar o valor do nome");
+                        string valorVeiculo = this.dataGridViewReserva["VeiculoDesignacao", e.RowIndex].Value.ToString() ?? throw new Exception("Não consegue acessar o valor do veiculoDesignacao");
+                        
+                        // Cancelar reserva do Veiculo escolhido
+                        utilizadorEscolhido = utilizadores.FindUtilizador(valorUtilizador);
+                        veiculoEscolhido = veiculos.FindVeiculo(valorVeiculo);
+                        reservaEscolhida = reservas.FindReserva(utilizadorEscolhido.Id, veiculoEscolhido.Id);
+                        reservaEscolhida.EstadoReserva = EstadoReserva.Cancelada;
+                        veiculoEscolhido.EstadoVeiculo = EstadoVeiculo.Ativo;
+                    }
+                    catch (Exception ex)
+                    {
+                        MessageBox.Show(ex.Message, "Atenção...", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                    }
+                    
                     this.BootFormDashboard();
                 }
             }

@@ -11,16 +11,16 @@ namespace ProjectPOO.Data
 {
     public class Veiculos
     {
-        readonly List<IVeiculo> veiculos = new();
+        public static List<IVeiculo> veiculos = new();
         uint lastVeiculoID = 0;
         uint lastTrotineteID = 0;
         uint lastBicicletaID = 0;
 
         public void AddVeiculo(Trotinete novaTrotinete) 
         {
-            lastVeiculoID = this.veiculos.Any() ? this.veiculos.Max(v => v.Id) : 0;
+            lastVeiculoID = Veiculos.veiculos.Any() ? Veiculos.veiculos.Max(v => v.Id) : 0;
 
-            lastTrotineteID = this.veiculos.Any() ? this.veiculos
+            lastTrotineteID = Veiculos.veiculos.Any() ? Veiculos.veiculos
                 .Where(v => v.TipoVeiculo.Equals(TipoVeiculo.Trotinete))
                 .OrderByDescending(t => t.Designacao)
                 .Select(t => UInt32.Parse(Regex.Match(t.Designacao, @"\d+").Value))
@@ -38,14 +38,14 @@ namespace ProjectPOO.Data
             //    throw new TeacherAlreadyExistsException("School2.Data.Teachers.Add()");
 
             //add teacher
-            this.veiculos.Add(novaTrotinete);
+            Veiculos.veiculos.Add(novaTrotinete);
         }
 
         public void AddVeiculo(Bicicleta novaBicicleta)
         {
-            lastVeiculoID = this.veiculos.Any() ? this.veiculos.Max(v => v.Id) : 0;
+            lastVeiculoID = Veiculos.veiculos.Any() ? Veiculos.veiculos.Max(v => v.Id) : 0;
 
-            lastBicicletaID = this.veiculos.Any() ? this.veiculos
+            lastBicicletaID = Veiculos.veiculos.Any() ? Veiculos.veiculos
                 .Where(v => v.TipoVeiculo.Equals(TipoVeiculo.Bicicleta))
                 .OrderByDescending(t => t.Designacao)
                 .Select(t => UInt32.Parse(Regex.Match(t.Designacao, @"\d+").Value))
@@ -63,7 +63,7 @@ namespace ProjectPOO.Data
             //    throw new TeacherAlreadyExistsException("School2.Data.Teachers.Add()");
 
             //add teacher
-            this.veiculos.Add(novaBicicleta);
+            Veiculos.veiculos.Add(novaBicicleta);
         }
 
         public void UpdateVeiculo(Trotinete trotinete)
@@ -82,10 +82,10 @@ namespace ProjectPOO.Data
             //get index of the wanted teacher
             //trotinetes.Find(t => t.TrotineteID.Equals(trotinete.));
 
-            index = this.veiculos.FindIndex(v => v.Designacao.Equals(trotinete.Designacao));
+            index = Veiculos.veiculos.FindIndex(v => v.Designacao.Equals(trotinete.Designacao));
 
             //update teachers with the new teacher
-            this.veiculos[index] = trotinete;
+            Veiculos.veiculos[index] = trotinete;
         }
 
         public void UpdateVeiculo(Bicicleta bicicleta)
@@ -102,10 +102,10 @@ namespace ProjectPOO.Data
             //    throw new TeacherDoesNotExistsException("School2.Data.Teachers.Update()");
 
             //get index of the wanted teacher
-            index = this.veiculos.FindIndex(v => v.Designacao.Equals(bicicleta.Designacao));
+            index = Veiculos.veiculos.FindIndex(v => v.Designacao.Equals(bicicleta.Designacao));
 
             //update teachers with the new teacher
-            this.veiculos[index] = bicicleta;
+            Veiculos.veiculos[index] = bicicleta;
         }
 
         public void DeleteVeiculo(Trotinete trotinete)
@@ -122,10 +122,10 @@ namespace ProjectPOO.Data
             //throw new TeacherDoesNotExistsException("School2.Data.Teachers.Delete()");
 
             //get index of the wanted teacher
-            index = this.veiculos.FindIndex(v => v.Designacao.Equals(trotinete.Designacao));
+            index = Veiculos.veiculos.FindIndex(v => v.Designacao.Equals(trotinete.Designacao));
 
             //remove the wanted teacher
-            this.veiculos.RemoveAt(index);
+            Veiculos.veiculos.RemoveAt(index);
         }
 
         public void DeleteVeiculo(Bicicleta bicicleta)
@@ -142,27 +142,27 @@ namespace ProjectPOO.Data
             //throw new TeacherDoesNotExistsException("School2.Data.Teachers.Delete()");
 
             //get index of the wanted teacher
-            index = this.veiculos.FindIndex(v => v.Designacao.Equals(bicicleta.Designacao));
+            index = Veiculos.veiculos.FindIndex(v => v.Designacao.Equals(bicicleta.Designacao));
 
             //remove the wanted teacher
-            this.veiculos.RemoveAt(index);
+            Veiculos.veiculos.RemoveAt(index);
         }
 
         /// <summary>
         /// Method to List all the utilizadores in the list
         /// </summary>
         /// <returns> return the utilizadores list </returns>
-        public List<IVeiculo> ListVeiculos() => this.veiculos;
+        public List<IVeiculo> ListVeiculos() => Veiculos.veiculos;
 
-        public List<IVeiculo> ListVeiculos(TipoVeiculo tipo) => this.veiculos.Where(v => v.TipoVeiculo.Equals(tipo)).ToList();
+        public List<IVeiculo> ListVeiculos(TipoVeiculo tipo) => Veiculos.veiculos.Where(v => v.TipoVeiculo.Equals(tipo)).ToList();
             
-        public List<IVeiculo> ListVeiculos(EstadoVeiculo estado) => this.veiculos.Where(v => v.EstadoVeiculo.Equals(estado)).ToList();
+        public List<IVeiculo> ListVeiculos(EstadoVeiculo estado) => Veiculos.veiculos.Where(v => v.EstadoVeiculo.Equals(estado)).ToList();
 
-        public List<IVeiculo> ListVeiculos(EstadoVeiculo estado, TipoVeiculo tipo) => this.veiculos.Where(v => v.EstadoVeiculo.Equals(estado) && v.TipoVeiculo.Equals(tipo)).ToList();
+        public List<IVeiculo> ListVeiculos(EstadoVeiculo estado, TipoVeiculo tipo) => Veiculos.veiculos.Where(v => v.EstadoVeiculo.Equals(estado) && v.TipoVeiculo.Equals(tipo)).ToList();
 
-        public IVeiculo FindVeiculo(uint id) => this.veiculos.FirstOrDefault(v => v.Id.Equals(id)) ?? throw new Exception("Id não existe na lista de veiculos");
+        public IVeiculo FindVeiculo(uint id) => Veiculos.veiculos.FirstOrDefault(v => v.Id.Equals(id)) ?? throw new Exception("Id não existe na lista de veiculos");
 
-        public IVeiculo FindVeiculo(string designacao) => this.veiculos.FirstOrDefault(v => v.Designacao.Equals(designacao)) ?? throw new Exception("Nome não existe na lista de veiculos");
+        public IVeiculo FindVeiculo(string designacao) => Veiculos.veiculos.FirstOrDefault(v => v.Designacao.Equals(designacao)) ?? throw new Exception("Nome não existe na lista de veiculos");
 
     }
 }

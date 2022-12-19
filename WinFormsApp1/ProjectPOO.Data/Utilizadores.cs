@@ -140,9 +140,9 @@ namespace ProjectPOO.Data
 
         public List<Funcionario>? ListOnlyFuncionarios() => Utilizadores.utilizadores.OfType<Funcionario>().ToList();
 
-        public Utilizador? FindUtilizadorUtilizador(uint id) => Utilizadores.utilizadores.OfType<Utilizador>().FirstOrDefault(u => u.Id.Equals(id));
+        public Utilizador? FindUtilizadorTipoUtilizador(uint id) => Utilizadores.utilizadores.OfType<Utilizador>().FirstOrDefault(u => u.Id.Equals(id));
 
-        public Funcionario? FindUtilizadorFuncionario(uint id) => Utilizadores.utilizadores.OfType<Funcionario>().FirstOrDefault(u => u.Id.Equals(id));
+        public Funcionario? FindUtilizadorTipoFuncionario(uint id) => Utilizadores.utilizadores.OfType<Funcionario>().FirstOrDefault(u => u.Id.Equals(id));
 
         public IPessoa? FindUtilizador(string nome) => Utilizadores.utilizadores.FirstOrDefault(u => u.Nome.Equals(nome));
         

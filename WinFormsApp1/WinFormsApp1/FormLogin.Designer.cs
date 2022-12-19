@@ -32,10 +32,10 @@
             this.labelPassword = new System.Windows.Forms.Label();
             this.textBoxUtilizador = new System.Windows.Forms.TextBox();
             this.textBoxPassword = new System.Windows.Forms.TextBox();
-            this.panelLogin = new System.Windows.Forms.Panel();
             this.buttonLoginOk = new System.Windows.Forms.Button();
             this.buttonLoginCancelar = new System.Windows.Forms.Button();
             this.buttonLoginShowPass = new System.Windows.Forms.Button();
+            this.panelLogin = new System.Windows.Forms.Panel();
             this.panelLogin.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -72,16 +72,6 @@
             this.textBoxPassword.Size = new System.Drawing.Size(183, 27);
             this.textBoxPassword.TabIndex = 3;
             // 
-            // panelLogin
-            // 
-            this.panelLogin.BackColor = System.Drawing.SystemColors.ActiveCaptionText;
-            this.panelLogin.Controls.Add(this.buttonLoginOk);
-            this.panelLogin.Controls.Add(this.buttonLoginCancelar);
-            this.panelLogin.Location = new System.Drawing.Point(-7, 136);
-            this.panelLogin.Name = "panelLogin";
-            this.panelLogin.Size = new System.Drawing.Size(414, 75);
-            this.panelLogin.TabIndex = 4;
-            // 
             // buttonLoginOk
             // 
             this.buttonLoginOk.Location = new System.Drawing.Point(256, 14);
@@ -113,6 +103,16 @@
             this.buttonLoginShowPass.UseVisualStyleBackColor = true;
             this.buttonLoginShowPass.Click += new System.EventHandler(this.ButtonLoginShowPass_Click);
             // 
+            // panelLogin
+            // 
+            this.panelLogin.BackColor = System.Drawing.SystemColors.ActiveCaptionText;
+            this.panelLogin.Controls.Add(this.buttonLoginOk);
+            this.panelLogin.Controls.Add(this.buttonLoginCancelar);
+            this.panelLogin.Location = new System.Drawing.Point(-7, 136);
+            this.panelLogin.Name = "panelLogin";
+            this.panelLogin.Size = new System.Drawing.Size(414, 75);
+            this.panelLogin.TabIndex = 4;
+            // 
             // FormLogin
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 20F);
@@ -141,9 +141,9 @@
         private Label labelPassword;
         private TextBox textBoxUtilizador;
         private TextBox textBoxPassword;
-        private Panel panelLogin;
         private Button buttonLoginOk;
         private Button buttonLoginCancelar;
         private Button buttonLoginShowPass;
+        private Panel panelLogin;
     }
 }
