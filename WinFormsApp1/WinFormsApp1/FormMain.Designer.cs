@@ -49,10 +49,11 @@
             this.dateTimePickerReservaDate = new System.Windows.Forms.DateTimePicker();
             this.buttonProcurarReserva = new System.Windows.Forms.Button();
             this.dataGridViewReserva = new System.Windows.Forms.DataGridView();
-            this.ButtonReserva = new System.Windows.Forms.DataGridViewButtonColumn();
-            this.ButtonCancelar = new System.Windows.Forms.DataGridViewButtonColumn();
             this.labelCountReservas = new System.Windows.Forms.Label();
             this.labelFuncionario = new System.Windows.Forms.Label();
+            this.ButtonReserva = new System.Windows.Forms.DataGridViewButtonColumn();
+            this.ButtonCancelar = new System.Windows.Forms.DataGridViewButtonColumn();
+            this.ButtonEditar = new System.Windows.Forms.DataGridViewButtonColumn();
             this.menuStrip1.SuspendLayout();
             this.statusStrip1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBoxBicicleta)).BeginInit();
@@ -245,15 +246,36 @@
             this.dataGridViewReserva.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dataGridViewReserva.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
             this.ButtonReserva,
-            this.ButtonCancelar});
+            this.ButtonCancelar,
+            this.ButtonEditar});
             this.dataGridViewReserva.Location = new System.Drawing.Point(310, 60);
             this.dataGridViewReserva.Name = "dataGridViewReserva";
             this.dataGridViewReserva.ReadOnly = true;
             this.dataGridViewReserva.RowHeadersWidth = 50;
             this.dataGridViewReserva.RowTemplate.Height = 28;
-            this.dataGridViewReserva.Size = new System.Drawing.Size(348, 238);
+            this.dataGridViewReserva.Size = new System.Drawing.Size(353, 238);
             this.dataGridViewReserva.TabIndex = 12;
             this.dataGridViewReserva.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.DataGridViewSoftware_CellClick);
+            // 
+            // labelCountReservas
+            // 
+            this.labelCountReservas.AutoSize = true;
+            this.labelCountReservas.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            this.labelCountReservas.Location = new System.Drawing.Point(36, 80);
+            this.labelCountReservas.Name = "labelCountReservas";
+            this.labelCountReservas.Size = new System.Drawing.Size(65, 28);
+            this.labelCountReservas.TabIndex = 13;
+            this.labelCountReservas.Text = "label1";
+            // 
+            // labelFuncionario
+            // 
+            this.labelFuncionario.AutoSize = true;
+            this.labelFuncionario.Font = new System.Drawing.Font("Segoe UI", 15F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            this.labelFuncionario.Location = new System.Drawing.Point(35, 100);
+            this.labelFuncionario.Name = "labelFuncionario";
+            this.labelFuncionario.Size = new System.Drawing.Size(81, 35);
+            this.labelFuncionario.TabIndex = 14;
+            this.labelFuncionario.Text = "label1";
             // 
             // ButtonReserva
             // 
@@ -277,25 +299,16 @@
             this.ButtonCancelar.UseColumnTextForButtonValue = true;
             this.ButtonCancelar.Width = 125;
             // 
-            // labelCountReservas
+            // ButtonEditar
             // 
-            this.labelCountReservas.AutoSize = true;
-            this.labelCountReservas.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-            this.labelCountReservas.Location = new System.Drawing.Point(36, 80);
-            this.labelCountReservas.Name = "labelCountReservas";
-            this.labelCountReservas.Size = new System.Drawing.Size(65, 28);
-            this.labelCountReservas.TabIndex = 13;
-            this.labelCountReservas.Text = "label1";
-            // 
-            // labelFuncionario
-            // 
-            this.labelFuncionario.AutoSize = true;
-            this.labelFuncionario.Font = new System.Drawing.Font("Segoe UI", 15F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-            this.labelFuncionario.Location = new System.Drawing.Point(35, 100);
-            this.labelFuncionario.Name = "labelFuncionario";
-            this.labelFuncionario.Size = new System.Drawing.Size(81, 35);
-            this.labelFuncionario.TabIndex = 14;
-            this.labelFuncionario.Text = "label1";
+            this.ButtonEditar.HeaderText = "";
+            this.ButtonEditar.MinimumWidth = 6;
+            this.ButtonEditar.Name = "ButtonEditar";
+            this.ButtonEditar.ReadOnly = true;
+            this.ButtonEditar.Resizable = System.Windows.Forms.DataGridViewTriState.False;
+            this.ButtonEditar.Text = "Editar";
+            this.ButtonEditar.UseColumnTextForButtonValue = true;
+            this.ButtonEditar.Width = 125;
             // 
             // FormMain
             // 
@@ -353,8 +366,6 @@
         private DateTimePicker dateTimePickerReservaDate;
         private Button buttonProcurarReserva;
         private DataGridView dataGridViewReserva;
-        private DataGridViewButtonColumn ButtonReserva;
-        private DataGridViewButtonColumn ButtonCancelar;
         private ToolStripMenuItem toolStripMenuVeiculos;
         private ToolStripMenuItem toolStripMenuCarregarSaldo;
         private Label labelCountReservas;
@@ -362,5 +373,8 @@
         private Label labelFuncionario;
         private ToolStripMenuItem adicionarVeiculoToolStripMenuItem;
         private ToolStripMenuItem listaDeVeiculosToolStripMenuItem;
+        private DataGridViewButtonColumn ButtonReserva;
+        private DataGridViewButtonColumn ButtonCancelar;
+        private DataGridViewButtonColumn ButtonEditar;
     }
 }

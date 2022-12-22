@@ -102,7 +102,7 @@ namespace ProjectPOO.Data
                 throw new ItemIsNullException("ProjectPOO.Data.Veiculos.UpdateVeiculo() - Trotinete é null");
 
             //Verificar se a trotinete existe na lista
-            if (Veiculos.veiculos.Exists(v => v.Id.Equals(trotinete.Id)))
+            if (!Veiculos.veiculos.Exists(v => v.Id.Equals(trotinete.Id)))
                 throw new ItemDoesNotExistsException("ProjectPOO.Data.Veiculos.UpdateVeiculo() - trotinete não existe na lista");
 
             //get index da trotinete
@@ -128,7 +128,7 @@ namespace ProjectPOO.Data
                 throw new ItemIsNullException("ProjectPOO.Data.Veiculos.UpdateVeiculo() - Bicicleta é null");
 
             //Verificar se a Bicicleta existe na lista
-            if (Veiculos.veiculos.Exists(v => v.Id.Equals(bicicleta.Id)))
+            if (!Veiculos.veiculos.Exists(v => v.Id.Equals(bicicleta.Id)))
                 throw new ItemDoesNotExistsException("ProjectPOO.Data.Veiculos.UpdateVeiculo() - Bicicleta não existe na lista");
 
             //get index da Bicicleta
@@ -154,7 +154,7 @@ namespace ProjectPOO.Data
                 throw new ItemIsNullException("ProjectPOO.Data.Reservas.DeleteVeiculo() - trotinete é null");
 
             //Verificar se a trotinete existe na lista
-            if (Veiculos.veiculos.Exists(t => t.Id.Equals(trotinete.Id)))
+            if (!Veiculos.veiculos.Any(t => t.Id.Equals(trotinete.Id)))
                 throw new ItemDoesNotExistsException("ProjectPOO.Data.Reservas.DeleteVeiculo() - trotinete não existe na lista");
 
             //get index do trotinete
@@ -180,7 +180,7 @@ namespace ProjectPOO.Data
                 throw new ItemIsNullException("ProjectPOO.Data.Reservas.DeleteVeiculo() - bicicleta é null");
 
             //Verificar se a bicicleta existe na lista
-            if (Veiculos.veiculos.Exists(t => t.Id.Equals(bicicleta.Id)))
+            if (!Veiculos.veiculos.Exists(t => t.Id.Equals(bicicleta.Id)))
                 throw new ItemDoesNotExistsException("ProjectPOO.Data.Reservas.DeleteVeiculo() - bicicleta não existe na lista");
 
             //get index do bicicleta

@@ -16,14 +16,14 @@ namespace WinFormsApp1
     {
         #region Variaveis de estado
 
-        readonly Veiculos veiculos = new();
-        readonly Reservas reservas = new();
-        readonly Utilizadores utilizadores = new();
-        IVeiculo veiculoEscolhido;
-        Reserva reservaEscolhida;
-        IPessoa utilizadorEscolhido;
-        IPessoa? utilizador;
-        bool existeUtilizador;
+        private readonly Veiculos veiculos = new();
+        private readonly Reservas reservas = new();
+        private readonly Utilizadores utilizadores = new();
+        private IVeiculo veiculoEscolhido;
+        private Reserva reservaEscolhida;
+        private IPessoa utilizadorEscolhido;
+        private IPessoa? utilizador;
+        private bool existeUtilizador;
 
         #endregion
 
@@ -94,6 +94,7 @@ namespace WinFormsApp1
             this.dataGridViewReserva.Visible = false;
             this.dataGridViewReserva.Columns["ButtonReserva"].Visible = false;
             this.dataGridViewReserva.Columns["ButtonCancelar"].Visible = true;
+            this.dataGridViewReserva.Columns["ButtonEditar"].Visible = false;
 
             this.labelCountReservas.Visible = false;
             this.labelFuncionario.Visible = false;
@@ -237,6 +238,7 @@ namespace WinFormsApp1
             {
                 this.dataGridViewReserva.Columns["ButtonReserva"].Visible = true;
                 this.dataGridViewReserva.Columns["ButtonCancelar"].Visible = false;
+                this.dataGridViewReserva.Columns["ButtonEditar"].Visible = false;
                 this.dataGridViewReserva.Columns["EstadoVeiculo"].Visible = false;
                 this.dataGridViewReserva.Columns["Kilometros"].Visible = false;
                 this.dataGridViewReserva.Columns["Id"].Visible = false;
@@ -245,6 +247,7 @@ namespace WinFormsApp1
             {
                 this.dataGridViewReserva.Columns["ButtonReserva"].Visible = false;
                 this.dataGridViewReserva.Columns["ButtonCancelar"].Visible = false;
+                this.dataGridViewReserva.Columns["ButtonEditar"].Visible = true;
                 this.dataGridViewReserva.Columns["EstadoVeiculo"].Visible = true;
                 this.dataGridViewReserva.Columns["Kilometros"].Visible = true;
                 this.dataGridViewReserva.Columns["Id"].Visible = false;
@@ -302,7 +305,7 @@ namespace WinFormsApp1
         /// <param name="e">contém os dados do evento</param>
         private void FormMain_Load(object sender, EventArgs e)
         {
-            SystemLogin.SetDevMode(utilizadores.ListUtilizadores().ElementAt(1));
+            SystemLogin.SetDevMode(utilizadores.ListUtilizadores().ElementAt(5));
             this.BootFormDashboard();
         }
 
@@ -381,12 +384,8 @@ namespace WinFormsApp1
         /// <param name="e">contém os dados do evento</param>
         private void ToolStripMenuCarregarSaldo_Click(object sender, EventArgs e)
         {
-            // TODO: Melhorar o sistema de carregar saldo, com um formulario dedicado, (Atual apenas serve para testes)
-
-            //verificar o utilizador atual logado e dar update ao saldo
-            utilizador = SystemLogin.GetUserLogged();
-            Utilizador? u = utilizadores.FindUtilizadorTipoUtilizador(utilizador.Id);
-            u.Saldo += 5;
+            FormCarregarSaldo formCarregarSaldo = new();
+            formCarregarSaldo.ShowDialog();
 
             //Dependendo de qual pagina o utilizador estava quando clicou no botão
             // direcionar para a mesma pagina
@@ -513,6 +512,29 @@ namespace WinFormsApp1
                     
                     this.BootFormDashboard();
                 }
+            }
+
+            //Tratar o evento de click nos butoes(editar) da tabela
+            if ((e.RowIndex >= 0) && (e.ColumnIndex == this.dataGridViewReserva.Columns["ButtonEditar"].Index))
+            {
+                try
+                {
+                    //Get Id veiculo escolhido
+                    uint valorIdVeiculo = UInt32.TryParse(this.dataGridViewReserva["Id", e.RowIndex].Value.ToString(), out uint parsed) ? parsed
+                        : throw new Exception("Não consegue acessar o valor do veiculoDesignacao");
+
+                    // Mostrar propriedades do veiculo escolhido
+                    veiculoEscolhido = veiculos.FindVeiculo(valorIdVeiculo);
+
+                    FormEditVeiculo formEditVeiculo = new(veiculoEscolhido);
+                    formEditVeiculo.ShowDialog();
+                }
+                catch (Exception ex)
+                {
+                    MessageBox.Show(ex.Message, "Atenção...", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                }
+
+                this.BootFormVeiculos();
             }
         }
 
