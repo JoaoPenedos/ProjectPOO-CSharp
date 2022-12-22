@@ -9,10 +9,14 @@ namespace ProjectPOO.Data
 {
     public class SystemLogin
     {
-        //state variables
+        #region Variaveis de estado
+
         private static IPessoa? loggedUser = null;
 
-        #region Static Methods
+        #endregion
+
+
+        #region Metodos Estaticos
 
         /// <summary>
         /// Metodo que devolve verdadeiro se existe um utilizador logado

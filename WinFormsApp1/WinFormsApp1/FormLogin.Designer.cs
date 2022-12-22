@@ -36,6 +36,7 @@
             this.buttonLoginCancelar = new System.Windows.Forms.Button();
             this.buttonLoginShowPass = new System.Windows.Forms.Button();
             this.panelLogin = new System.Windows.Forms.Panel();
+            this.linkLabelRegistar = new System.Windows.Forms.LinkLabel();
             this.panelLogin.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -113,11 +114,24 @@
             this.panelLogin.Size = new System.Drawing.Size(414, 75);
             this.panelLogin.TabIndex = 4;
             // 
+            // linkLabelRegistar
+            // 
+            this.linkLabelRegistar.AutoSize = true;
+            this.linkLabelRegistar.LinkColor = System.Drawing.Color.Teal;
+            this.linkLabelRegistar.Location = new System.Drawing.Point(35, 113);
+            this.linkLabelRegistar.Name = "linkLabelRegistar";
+            this.linkLabelRegistar.Size = new System.Drawing.Size(131, 20);
+            this.linkLabelRegistar.TabIndex = 8;
+            this.linkLabelRegistar.TabStop = true;
+            this.linkLabelRegistar.Text = "Não possui conta?";
+            this.linkLabelRegistar.Click += new System.EventHandler(this.LinkLabelRegistar_Click);
+            // 
             // FormLogin
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 20F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(400, 200);
+            this.Controls.Add(this.linkLabelRegistar);
             this.Controls.Add(this.buttonLoginShowPass);
             this.Controls.Add(this.panelLogin);
             this.Controls.Add(this.textBoxPassword);
@@ -145,5 +159,6 @@
         private Button buttonLoginCancelar;
         private Button buttonLoginShowPass;
         private Panel panelLogin;
+        private LinkLabel linkLabelRegistar;
     }
 }

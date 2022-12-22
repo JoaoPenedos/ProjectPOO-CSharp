@@ -1,4 +1,5 @@
 ﻿using ProjectPOO.Enums;
+using ProjectPOO.Exceptions;
 using ProjectPOO.Models;
 using System;
 using System.Collections.Generic;
@@ -10,77 +11,113 @@ namespace ProjectPOO.Data
 {
     public class Reservas
     {
+        #region Variaveis de estado
+
         readonly List<Reserva> reservas = new();
         uint lastReservaID = 0;
 
+        #endregion
+
+
+        #region Metodos
+
+        /// <summary>
+        /// Metodo para adicionar uma nova reserva na lista de reservas
+        /// </summary>
+        /// <param name="novaReserva">Reserva a adicionar</param>
+        /// <exception cref="ItemIsNullException">No caso de a nova Reserva ser nula</exception>
         public void AddReserva(Reserva novaReserva)
         {
+            //defenir os id e as designações corretamente
             lastReservaID = this.reservas.Any() ? this.reservas.Max(r => r.Id) : 0;
             novaReserva.Id = lastReservaID + 1;
 
-            //Utilizador cannot be null
-            //if (novoUtilizador is null)
-            //    throw new TeacherIsNullException("School2.Data.Teachers.Add()");
+            //Reserva nao pode ser nula
+            if (novaReserva is null)
+                throw new ItemIsNullException("ProjectPOO.Data.Reservas.AddReserva() - Nova reserva é null");
 
-            //teacher must be unique
-            //if (this.teachers.Exists(t => t.Contribuinte.Equals(newTeacher.Contribuinte)))
-            //    throw new TeacherAlreadyExistsException("School2.Data.Teachers.Add()");
-
-            //add teacher
+            //adicionar reserva
             this.reservas.Add(novaReserva);
         }
 
+        /// <summary>
+        /// Metodo para dar update a uma reserva na lista de reservas
+        /// </summary>
+        /// <param name="reserva">reserva a editar</param>
+        /// <exception cref="ItemIsNullException">No caso de a Reserva ser nula</exception>
+        /// <exception cref="ItemDoesNotExistsException">No caso de a Reserva não existir na lista</exception>
         public void UpdateReserva(Reserva reserva)
         {
-            //variables
+            //variaveis
             int index;
 
-            //teacher cannot be null
-            //if (teacher is null)
-            //    throw new TeacherIsNullException("School2.Data.Teachers.Update()");
+            //Reserva nao pode ser nula
+            if (reserva is null)
+                throw new ItemIsNullException("ProjectPOO.Data.Reservas.UpdateReserva() - reserva é null");
 
-            //find if teacher exists in the list
-            //if (this.teachers.Exists(t => t.Contribuinte.Equals(teacher.Contribuinte)))
-            //    throw new TeacherDoesNotExistsException("School2.Data.Teachers.Update()");
+            //Verificar se a Reserva existe na lista
+            if (this.reservas.Exists(t => t.Id.Equals(reserva.Id)))
+                throw new ItemDoesNotExistsException("ProjectPOO.Data.Reservas.UpdateReserva() - reserva não existe na lista");
 
-            //get index of the wanted teacher
+            //get index da reserva 
             index = this.reservas.FindIndex(u => u.Id.Equals(reserva.Id));
 
-            //update teachers with the new teacher
+            //update reserva
             this.reservas[index] = reserva;
         }
 
+        /// <summary>
+        /// Metodo para dar eliminar uma reserva da lista de reservas
+        /// </summary>
+        /// <param name="reserva">reserva a eliminar</param>
+        /// <exception cref="ItemIsNullException">No caso de a Reserva ser nula</exception>
+        /// <exception cref="ItemDoesNotExistsException">No caso de a Reserva não existir na lista</exception>
         public void DeleteReserva(Reserva reserva)
         {
-            //variables
+            //variaveis
             int index;
 
-            //teacher cannot be null
-            //if (teacher is null)
-            //    throw new TeacherIsNullException("School2.Data.Teachers.Delete()");
+            //Reserva nao pode ser nula
+            if (reserva is null)
+                throw new ItemIsNullException("ProjectPOO.Data.Reservas.DeleteReserva() - reserva é null");
 
-            //find if teacher exists in the list
-            //if (this.teachers.Exists(t => t.Contribuinte.Equals(teacher.Contribuinte)))
-            //throw new TeacherDoesNotExistsException("School2.Data.Teachers.Delete()");
+            //Verificar se a Reserva existe na lista
+            if (this.reservas.Exists(t => t.Id.Equals(reserva.Id)))
+                throw new ItemDoesNotExistsException("ProjectPOO.Data.Reservas.DeleteReserva() - reserva não existe na lista");
 
-            //get index of the wanted teacher
+            //get index da reserva
             index = this.reservas.FindIndex(u => u.Id.Equals(reserva.Id));
 
-            //remove the wanted teacher
+            //remover a reserva
             this.reservas.RemoveAt(index);
         }
 
         /// <summary>
-        /// Method to List all the utilizadores in the list
+        /// Metodo para listar todas as reservas na lista
         /// </summary>
-        /// <returns> return the teachers list </returns>
+        /// <returns> retorna a lista de reservas</returns>
         public List<Reserva> ListReservas() => this.reservas;
 
+        /// <summary>
+        /// Metodo encontrar uma determinada reserva pelo seu Id
+        /// </summary>
+        /// <param name="id">id da reserva a procurar</param>
+        /// <returns> retorna a reserva pretendida</returns>
+        /// <exception cref="ItemDoesNotExistsException">No caso de a Reserva não existir na lista</exception>
         public Reserva FindReserva(uint id) => this.reservas.FirstOrDefault(r => r.Id.Equals(id)) 
-            ?? throw new Exception("Id não existe na lista de reservas");
-        
+            ?? throw new ItemDoesNotExistsException("ProjectPOO.Data.Reservas.FindReserva() - Id não existe na lista de reservas");
+
+        /// <summary>
+        /// Metodo encontrar uma determinada reserva apartir do Id do utilizador e do veiculo
+        /// </summary>
+        /// <param name="utilizadorId">id do utilizador na reserva a procurar</param>
+        /// <param name="veiculoId">id do veiculo na reserva a procurar</param>
+        /// <returns> retorna a reserva pretendida</returns>
+        /// <exception cref="ItemDoesNotExistsException">No caso de a Reserva não existir na lista</exception>
         public Reserva FindReserva(uint utilizadorId, uint veiculoId) => this.reservas.FirstOrDefault(r => r.UtilizadorId.Equals(utilizadorId) && r.VeiculoId.Equals(veiculoId)) 
-            ?? throw new Exception("Id do utilizador ou do veiculo não existe na lista de reservas");
+            ?? throw new ItemDoesNotExistsException("ProjectPOO.Data.Reservas.FindReserva() - Id do utilizador ou do veiculo não existe na lista de reservas");
+
+        #endregion
 
     }
 }

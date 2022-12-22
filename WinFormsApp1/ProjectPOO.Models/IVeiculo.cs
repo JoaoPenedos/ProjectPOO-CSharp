@@ -10,27 +10,66 @@ namespace ProjectPOO.Models
 {
     public interface IVeiculo
     {
+        #region Propriedades
+
+        /// <summary>
+        /// Id de Veiculo
+        /// </summary>
         //[Browsable(false)]
-        public uint Id { get; set; }
+        uint Id { get; set; }
 
-        public string Designacao { get; set; }
+        /// <summary>
+        /// Designacao de Veiculo
+        /// </summary>
+        string Designacao { get; set; }
 
-        public string Modelo { get; set; }
+        /// <summary>
+        /// Modelo de Veiculo
+        /// </summary>
+        string Modelo { get; set; }
 
-        public double CustoMinuto { get; set; }
+        /// <summary>
+        /// Custo Minuto de Veiculo
+        /// </summary>
+        double CustoMinuto { get; set; }
 
-        public double CustoReserva { get; set; }
+        /// <summary>
+        /// Custo Reserva de Veiculo
+        /// </summary>
+        double CustoReserva { get; set; }
 
-        public EstadoVeiculo EstadoVeiculo { get; set; }
+        /// <summary>
+        /// Estado atual de Veiculo
+        /// </summary>
+        EstadoVeiculo EstadoVeiculo { get; set; }
 
-        public int Kilometros { get; protected set; }
+        /// <summary>
+        /// Kilometros de Veiculo
+        /// </summary>
+        int Kilometros { get; protected set; }
 
-        public TipoVeiculo TipoVeiculo { get; set; }
+        /// <summary>
+        /// Tipo de Veiculo
+        /// </summary>
+        TipoVeiculo TipoVeiculo { get; set; }
+
+        #endregion
 
 
+        #region Metodos
 
-        public void UpdateKilometros(int newKilometrosTraveled);
+        /// <summary>
+        /// Metodo que atualiza os kilometros do veiculo
+        /// </summary>
+        /// <param name="newKilometrosTraveled">kilometros viagados</param>
+        void UpdateKilometros(int newKilometrosTraveled);
 
-        public void SetDesignacao(uint lastVeciculoTypeID);
+        /// <summary>
+        /// Metodo que insere o valor certo nos Ids de Veiculo
+        /// </summary>
+        /// <param name="lastVeciculoTypeID">Id do ultimo veiculo na lista</param>
+        void SetDesignacao(uint lastVeciculoTypeID);
+
+        #endregion
     }
 }

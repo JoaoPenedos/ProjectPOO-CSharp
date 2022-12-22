@@ -78,6 +78,7 @@
             this.textBoxCustoMinuto.Size = new System.Drawing.Size(224, 27);
             this.textBoxCustoMinuto.TabIndex = 3;
             this.textBoxCustoMinuto.TextChanged += new System.EventHandler(this.TextBoxCustoMinuto_TextChanged);
+            this.textBoxCustoMinuto.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.TextBoxCustoMinuto_KeyPress);
             // 
             // labelCustoMinuto
             // 
@@ -116,6 +117,7 @@
             this.textBoxCustoReserva.Size = new System.Drawing.Size(224, 27);
             this.textBoxCustoReserva.TabIndex = 7;
             this.textBoxCustoReserva.TextChanged += new System.EventHandler(this.TextBoxCustoReserva_TextChanged);
+            this.textBoxCustoReserva.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.TextBoxCustoReserva_KeyPress);
             // 
             // textBoxKilometros
             // 
@@ -124,6 +126,7 @@
             this.textBoxKilometros.Size = new System.Drawing.Size(224, 27);
             this.textBoxKilometros.TabIndex = 8;
             this.textBoxKilometros.TextChanged += new System.EventHandler(this.TextBoxKilometros_TextChanged);
+            this.textBoxKilometros.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.TextBoxKilometros_KeyPress);
             // 
             // buttonCancelar
             // 
@@ -185,7 +188,7 @@
             this.Controls.Add(this.textBoxModelo);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
             this.Name = "FormAddVeiculo";
-            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent;
             this.Text = "FormAddVeiculo";
             this.Load += new System.EventHandler(this.FormAddVeiculo_Load);
             this.ResumeLayout(false);

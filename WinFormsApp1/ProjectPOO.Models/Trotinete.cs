@@ -10,6 +10,16 @@ namespace ProjectPOO.Models
 {
     public class Trotinete : IVeiculo
     {
+        #region Construtor
+
+        /// <summary>
+        /// Construtor para a trotinete
+        /// </summary>
+        /// <param name="modelo">modelo da trotinete</param>
+        /// <param name="custoMinuto">custo por minuto da trotinete</param>
+        /// <param name="custoReserva">custo da reserva da trotinete</param>
+        /// <param name="estadoVeiculo">estado da trotinete</param>
+        /// <param name="kilometros">kilometros da trotinete</param>
         public Trotinete(string modelo, double custoMinuto, double custoReserva, EstadoVeiculo estadoVeiculo, int kilometros = 0)
         {
             this.Modelo = modelo;
@@ -20,6 +30,13 @@ namespace ProjectPOO.Models
             this.TipoVeiculo = TipoVeiculo.Trotinete;
         }
 
+        /// <summary>
+        /// Construtor para o trotinete
+        /// </summary>
+        /// <param name="modelo">modelo da trotinete</param>
+        /// <param name="custoMinuto">custo por minuto da trotinete</param>
+        /// <param name="custoReserva">custo da reserva da trotinete</param>
+        /// <param name="kilometros">kilometros da trotinete</param>
         public Trotinete(string modelo, double custoMinuto, double custoReserva, int kilometros = 0)
         {
             this.Modelo = modelo;
@@ -30,25 +47,69 @@ namespace ProjectPOO.Models
             this.TipoVeiculo = TipoVeiculo.Trotinete;
         }
 
+        #endregion
+
+
+        #region Propriedades
+
+        /// <summary>
+        /// Id de Trotinete
+        /// </summary>
         //[Browsable(false)]
         public uint Id { get; set; }
 
+        /// <summary>
+        /// Designacao de Trotinete
+        /// </summary>
         public string Designacao { get; set; }
 
+        /// <summary>
+        /// Modelo de Trotinete
+        /// </summary>
         public string Modelo { get; set; }
 
+        /// <summary>
+        /// Custo Minuto de Trotinete
+        /// </summary>
         public double CustoMinuto { get; set; }
 
+        /// <summary>
+        /// Custo Reserva de Trotinete
+        /// </summary>
         public double CustoReserva { get; set; }
 
+        /// <summary>
+        /// Estado atual de Trotinete
+        /// </summary>
         public EstadoVeiculo EstadoVeiculo { get; set; }
 
+        /// <summary>
+        /// Kilometros de Trotinete
+        /// </summary>
         public int Kilometros { get; set; }
 
+        /// <summary>
+        /// Tipo de Trotinete
+        /// </summary>
         public TipoVeiculo TipoVeiculo { get; set; }
 
+        #endregion
+
+
+        #region Metodos
+
+        /// <summary>
+        /// Metodo que atualiza os kilometros da Trotinete
+        /// </summary>
+        /// <param name="newKilometrosTraveled">kilometros viagados</param>
         public void UpdateKilometros(int newKilometrosTraveled) => this.Kilometros += newKilometrosTraveled;
 
+        /// <summary>
+        /// Metodo que insere o valor certo nos Ids da Trotinete
+        /// </summary>
+        /// <param name="lastVeciculoTypeID">Id da ultima Trotinete na lista</param>
         public void SetDesignacao(uint lastTrotineteID) => this.Designacao = "Trotinete_N" + lastTrotineteID.ToString("000");
+
+        #endregion
     }
 }

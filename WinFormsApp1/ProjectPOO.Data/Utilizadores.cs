@@ -1,4 +1,5 @@
-﻿using ProjectPOO.Models;
+﻿using ProjectPOO.Exceptions;
+using ProjectPOO.Models;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -10,142 +11,219 @@ namespace ProjectPOO.Data
 {
     public class Utilizadores
     {
+        #region Variaveis de estado
+
         public static List<IPessoa> utilizadores = new();
         uint lastUtilizadorID = 0;
 
-        //methods
+        #endregion
+
+
+        #region Metodos
+
+        /// <summary>
+        /// Metodo para adicionar um novo utilizador na lista de utilizadores
+        /// </summary>
+        /// <param name="novoUtilizador">novo Utilizador a adicionar</param>
+        /// <exception cref="ItemIsNullException">No caso de o utilizador ser null</exception>
+        /// <exception cref="ItemAlreadyExistsException">No caso de o novo email ser igual a um antigo</exception>
         public void AddUtilizador(Utilizador novoUtilizador)
         {
+            //defenir os id e as designações corretamente
             lastUtilizadorID = Utilizadores.utilizadores.Any() ? Utilizadores.utilizadores.Max(u => u.Id) : 0;
             novoUtilizador.Id = lastUtilizadorID + 1;
 
-            //Utilizador cannot be null
-            //if (novoUtilizador is null)
-            //    throw new TeacherIsNullException("School2.Data.Teachers.Add()");
+            //Utilizador não pode ser null
+            if (novoUtilizador is null)
+                throw new ItemIsNullException("ProjectPOO.Data.Utilizadores.AddUtilizador() - Novo utilizador é null");
 
-            //teacher must be unique
-            //if (this.teachers.Exists(t => t.Contribuinte.Equals(newTeacher.Contribuinte)))
-            //    throw new TeacherAlreadyExistsException("School2.Data.Teachers.Add()");
+            //utilizador tem que ser unico
+            if (Utilizadores.utilizadores.Exists(u => u.Email.Equals(novoUtilizador.Email)))
+                throw new ItemAlreadyExistsException("ProjectPOO.Data.Utilizadores.AddUtilizador() - Já existe um utilizador com esse email");
 
-            //add teacher
+            //adicionar utilizador
             Utilizadores.utilizadores.Add(novoUtilizador);
         }
 
+        /// <summary>
+        /// Metodo para adicionar um novo funcionario na lista de utilizadores
+        /// </summary>
+        /// <param name="novoFuncionario">novo funcionario a adicionar</param>
+        /// <exception cref="ItemIsNullException">No caso de o funcionario ser null</exception>
+        /// <exception cref="ItemAlreadyExistsException">No caso de o novo email ser igual a um antigo</exception>
         public void AddUtilizador(Funcionario novoFuncionario)
-        {
+        { 
+            //defenir os id e as designações corretamente
             lastUtilizadorID = Utilizadores.utilizadores.Any() ? Utilizadores.utilizadores.Max(u => u.Id) : 0;
             novoFuncionario.Id = lastUtilizadorID + 1;
-            //lastUtilizadorID = Utilizadores.utilizadores.Any() ? Utilizadores.utilizadores.Max(r => r.Id) : 0;
-            //novoFuncionario.Id = lastUtilizadorID + 1;
 
-            //Utilizador cannot be null
-            //if (novoUtilizador is null)
-            //    throw new TeacherIsNullException("School2.Data.Teachers.Add()");
+            //Funcionario não pode ser null
+            if (novoFuncionario is null)
+                throw new ItemIsNullException("ProjectPOO.Data.Utilizadores.AddUtilizador() - Novo funcionario é null");
 
-            //teacher must be unique
-            //if (this.teachers.Exists(t => t.Contribuinte.Equals(newTeacher.Contribuinte)))
-            //    throw new TeacherAlreadyExistsException("School2.Data.Teachers.Add()");
+            //funcioario tem que ser unico
+            if (Utilizadores.utilizadores.Exists(f => f.Email.Equals(novoFuncionario.Email)))
+                throw new ItemAlreadyExistsException("ProjectPOO.Data.Utilizadores.AddUtilizador() - Já existe um funcionario com esse email");
 
-            //add teacher
+            //adicionar funcionario
             Utilizadores.utilizadores.Add(novoFuncionario);
         }
 
+        /// <summary>
+        /// Metodo para dar update a um utilizador na lista de utilizadores
+        /// </summary>
+        /// <param name="utilizador">utilizador a editar</param>
+        /// <exception cref="ItemIsNullException">No caso de o utilizador ser null</exception>
+        /// <exception cref="ItemDoesNotExistsException">No caso de o utilizador não existir na lista</exception>
         public void UpdateUtilizador(Utilizador utilizador)
         {
-            //variables
+            //variaveis
             int index;
 
-            //teacher cannot be null
-            //if (teacher is null)
-            //    throw new TeacherIsNullException("School2.Data.Teachers.Update()");
+            //Utilizador não pode ser null
+            if (utilizador is null)
+                throw new ItemIsNullException("ProjectPOO.Data.Utilizadores.UpdateUtilizador() - utilizador é null");
 
-            //find if teacher exists in the list
-            //if (this.teachers.Exists(t => t.Contribuinte.Equals(teacher.Contribuinte)))
-            //    throw new TeacherDoesNotExistsException("School2.Data.Teachers.Update()");
+            //Verificar se o utilizador existe na lista
+            if (Utilizadores.utilizadores.Exists(u => u.Id.Equals(utilizador.Id)))
+                throw new ItemDoesNotExistsException("ProjectPOO.Data.Utilizadores.UpdateUtilizador() - utilizador não existe na lista");
 
-            //get index of the wanted teacher
+            //get index do utilizador
             index = Utilizadores.utilizadores.FindIndex(u => u.Id.Equals(utilizador.Id));
 
-            //update teachers with the new teacher
+            //update utilizador
             Utilizadores.utilizadores[index] = utilizador;
         }
 
+        /// <summary>
+        /// Metodo para dar update a um funcionario na lista de utilizadores
+        /// </summary>
+        /// <param name="funcionario">funcionario a editar</param>
+        /// <exception cref="ItemIsNullException">No caso de o funcionario ser null</exception>
+        /// <exception cref="ItemDoesNotExistsException">No caso de o funcionario não existir na lista</exception>
         public void UpdateUtilizador(Funcionario funcionario)
         {
-            //variables
+            //variaveis
             int index;
 
-            //teacher cannot be null
-            //if (teacher is null)
-            //    throw new TeacherIsNullException("School2.Data.Teachers.Update()");
+            //Funcionario não pode ser null
+            if (funcionario is null)
+                throw new ItemIsNullException("ProjectPOO.Data.Utilizadores.UpdateUtilizador() - funcionario é null");
 
-            //find if teacher exists in the list
-            //if (this.teachers.Exists(t => t.Contribuinte.Equals(teacher.Contribuinte)))
-            //    throw new TeacherDoesNotExistsException("School2.Data.Teachers.Update()");
+            //Verificar se o funcionario existe na lista
+            if (Utilizadores.utilizadores.Exists(f => f.Id.Equals(funcionario.Id)))
+                throw new ItemDoesNotExistsException("ProjectPOO.Data.Utilizadores.UpdateUtilizador() - funcionario não existe na lista");
 
-            //get index of the wanted teacher
-            index = Utilizadores.utilizadores.FindIndex(u => u.Id.Equals(funcionario.Id));
+            //get index do funcionario
+            index = Utilizadores.utilizadores.FindIndex(f => f.Id.Equals(funcionario.Id));
 
-            //update teachers with the new teacher
+            //update funcionario
             Utilizadores.utilizadores[index] = funcionario;
         }
 
+        /// <summary>
+        /// Metodo para eliminar um utilizador na lista de utilizadores
+        /// </summary>
+        /// <param name="utilizador">utilizador a eliminar</param>
+        /// <exception cref="ItemIsNullException">No caso de o utilizador ser null</exception>
+        /// <exception cref="ItemDoesNotExistsException">No caso de o utilizador não existir na lista</exception>
         public void DeleteUtilizador(Utilizador utilizador)
         {
-            //variables
+            //variaveis
             int index;
 
-            //teacher cannot be null
-            //if (teacher is null)
-            //    throw new TeacherIsNullException("School2.Data.Teachers.Delete()");
+            //Utilizador nao pode ser null
+            if (utilizador is null)
+                throw new ItemIsNullException("ProjectPOO.Data.Utilizadores.DeleteUtilizador() - utilizador é null");
 
-            //find if teacher exists in the list
-            //if (this.teachers.Exists(t => t.Contribuinte.Equals(teacher.Contribuinte)))
-            //throw new TeacherDoesNotExistsException("School2.Data.Teachers.Delete()");
+            //Verificar se o Utilizador existe na lista
+            if (Utilizadores.utilizadores.Exists(t => t.Id.Equals(utilizador.Id)))
+                throw new ItemDoesNotExistsException("ProjectPOO.Data.Utilizadores.DeleteUtilizador() - utilizador não existe na lista");
 
-            //get index of the wanted teacher
+            //get index do utilizador
             index = Utilizadores.utilizadores.FindIndex(u => u.Id.Equals(utilizador.Id));
 
-            //remove the wanted teacher
-            Utilizadores.utilizadores.RemoveAt(index);
-        }
-
-        public void DeleteUtilizador(Funcionario funcionario)
-        {
-            //variables
-            int index;
-
-            //teacher cannot be null
-            //if (teacher is null)
-            //    throw new TeacherIsNullException("School2.Data.Teachers.Delete()");
-
-            //find if teacher exists in the list
-            //if (this.teachers.Exists(t => t.Contribuinte.Equals(teacher.Contribuinte)))
-            //throw new TeacherDoesNotExistsException("School2.Data.Teachers.Delete()");
-
-            //get index of the wanted teacher
-            index = Utilizadores.utilizadores.FindIndex(f => f.Id.Equals(funcionario.Id));
-
-            //remove the wanted teacher
+            //remover o utilizador
             Utilizadores.utilizadores.RemoveAt(index);
         }
 
         /// <summary>
-        /// Method to List all the utilizadores in the list
+        /// Metodo para eliminar um funcionario na lista de utilizadores
         /// </summary>
-        /// <returns> return the teachers list </returns>
+        /// <param name="funcionario">funcionario a eliminar</param>
+        /// <exception cref="ItemIsNullException">No caso de o funcionario ser null</exception>
+        /// <exception cref="ItemDoesNotExistsException">No caso de o funcionario não existir na lista</exception>
+        public void DeleteUtilizador(Funcionario funcionario)
+        {
+            //variaveis
+            int index;
+
+            //Funcionario nao pode ser null
+            if (funcionario is null)
+                throw new ItemIsNullException("ProjectPOO.Data.Utilizadores.DeleteUtilizador() - funcionario é null");
+
+            //Verificar se o Funcionario existe na lista
+            if (Utilizadores.utilizadores.Exists(t => t.Id.Equals(funcionario.Id)))
+                throw new ItemDoesNotExistsException("ProjectPOO.Data.Utilizadores.DeleteUtilizador() - funcionario não existe na lista");
+
+            //get index do funcionario
+            index = Utilizadores.utilizadores.FindIndex(f => f.Id.Equals(funcionario.Id));
+
+            //remover o funcionario
+            Utilizadores.utilizadores.RemoveAt(index);
+        }
+
+        /// <summary>
+        /// Metodo para listar todos os utilizadores na lista
+        /// </summary>
+        /// <returns> retorna a lista de utilizadores</returns>
         public List<IPessoa> ListUtilizadores() => Utilizadores.utilizadores;
 
+        /// <summary>
+        /// Metodo para listar todos os utilizadores do tipo Utilizador na lista
+        /// </summary>
+        /// <returns> retorna a lista de utilizadores tipo Utilizador</returns>
         public List<Utilizador>? ListOnlyUtilizadores() => Utilizadores.utilizadores.OfType<Utilizador>().ToList();
 
+        /// <summary>
+        /// Metodo para listar todos os utilizadores do tipo Funcionario na lista
+        /// </summary>
+        /// <returns> retorna a lista de utilizadores tipo Funcionario</returns>
         public List<Funcionario>? ListOnlyFuncionarios() => Utilizadores.utilizadores.OfType<Funcionario>().ToList();
 
-        public Utilizador? FindUtilizadorTipoUtilizador(uint id) => Utilizadores.utilizadores.OfType<Utilizador>().FirstOrDefault(u => u.Id.Equals(id));
+        /// <summary>
+        /// Metodo que procura um determinado utilizador do tipo Utilizador pelo seu Id na lista de utilizadores
+        /// </summary>
+        /// <param name="id">Id do utilizador a procurar</param>
+        /// <returns>retorna o utilizador pretendido se existir</returns>
+        public Utilizador FindUtilizadorTipoUtilizador(uint id) => Utilizadores.utilizadores.OfType<Utilizador>().FirstOrDefault(u => u.Id.Equals(id))
+            ?? throw new ItemDoesNotExistsException("ProjectPOO.Data.Utilizadores.FindUtilizadorTipoUtilizador() - Id do utilizador não existe na lista");
 
-        public Funcionario? FindUtilizadorTipoFuncionario(uint id) => Utilizadores.utilizadores.OfType<Funcionario>().FirstOrDefault(u => u.Id.Equals(id));
+        /// <summary>
+        /// Metodo que procura um determinado funcionario do tipo Funcionario pelo seu Id na lista de utilizadores
+        /// </summary>
+        /// <param name="id">Id do funcionario a procurar</param>
+        /// <returns>retorna o funcionario pretendido se existir</returns>
+        public Funcionario FindUtilizadorTipoFuncionario(uint id) => Utilizadores.utilizadores.OfType<Funcionario>().FirstOrDefault(u => u.Id.Equals(id))
+            ?? throw new ItemDoesNotExistsException("ProjectPOO.Data.Utilizadores.FindUtilizadorTipoFuncionario() - Id do funcionario não existe na lista");
 
-        public IPessoa? FindUtilizador(string nome) => Utilizadores.utilizadores.FirstOrDefault(u => u.Nome.Equals(nome));
-        
-        public IPessoa? FindUtilizador(string nome, string pass) => Utilizadores.utilizadores.FirstOrDefault(u => u.Nome.Equals(nome) && u.Password.Equals(pass));
+        /// <summary>
+        /// Metodo que procura um determinado utilizador do tipo IPessoa pelo seu nome na lista de utilizadores
+        /// </summary>
+        /// <param name="nome">Nome do utilizador a procurar</param>
+        /// <returns>retorna o utilizador pretendido se existir</returns>
+        public IPessoa FindUtilizador(string nome) => Utilizadores.utilizadores.FirstOrDefault(u => u.Nome.Equals(nome))
+            ?? throw new ItemDoesNotExistsException("ProjectPOO.Data.Utilizadores.FindUtilizador() - nome do utilizador não existe na lista");
+
+        /// <summary>
+        /// Metodo que procura um determinado utilizador do tipo IPessoa pelo seu nome e password na lista de utilizadores
+        /// </summary>
+        /// <param name="nome">Nome do utilizador a procurar</param>
+        /// <param name="pass">Password do utilizador a procurar</param>
+        /// <returns>retorna o utilizador pretendido se existir</returns>
+        public IPessoa FindUtilizador(string nome, string pass) => Utilizadores.utilizadores.FirstOrDefault(u => u.Nome.Equals(nome) && u.Password.Equals(pass)) 
+            ?? throw new ItemDoesNotExistsException("ProjectPOO.Data.Utilizadores.FindUtilizador() - nome ou pass do utilizador não existem na lista");
+
+        #endregion
     }
 }

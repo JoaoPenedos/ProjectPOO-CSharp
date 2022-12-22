@@ -6,13 +6,13 @@ using System.Threading.Tasks;
 
 namespace ProjectPOO.Exceptions
 {
-    public class ItemIsNullException : Exception
+    public class ItemAlreadyExistsException : Exception
     {
         /// <summary>
-        /// Construtor para a exception ItemIsNullException
+        /// Construtor para a exception ItemAlreadyExistsException
         /// </summary>
         /// <param name="source">source recebida</param>
-        public ItemIsNullException(string source)
+        public ItemAlreadyExistsException(string source)
         {
             this.Source = source;
         }
@@ -20,6 +20,6 @@ namespace ProjectPOO.Exceptions
         /// <summary>
         /// Mensagem a mostrar
         /// </summary>
-        public override string Message => "O item recebido é null!";
+        public override string Message => "O item recebido já existe!";
     }
 }
