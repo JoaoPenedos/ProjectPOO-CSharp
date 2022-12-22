@@ -455,21 +455,28 @@ namespace WinFormsApp1
                     //Se a escolha for OK na message box, reservar o veiculo escolhido
                     if (escolhaDoUtilizador == DialogResult.OK)
                     {
-                        //Get Id acerca da reserva escolhida
-                        uint valorId = UInt32.Parse(this.dataGridViewReserva["Id", e.RowIndex].Value.ToString() ?? throw new Exception("Não consegue acessar o valor do index"));
+                        try
+                        {
+                            //Get Id acerca da reserva escolhida
+                            uint valorId = UInt32.Parse(this.dataGridViewReserva["Id", e.RowIndex].Value.ToString() ?? throw new Exception("Não consegue acessar o valor do index"));
                     
-                        // Reservar Veiculo escolhido
-                        reservas.AddReserva(new Reserva (
-                            this.dateTimePickerReservaDate.Value.Date.Add(this.dateTimePickerReservaTime.Value.TimeOfDay),
-                            SystemLogin.GetUserLogged().Id,
-                            valorId));
+                            // Reservar Veiculo escolhido
+                            reservas.AddReserva(new Reserva (
+                                this.dateTimePickerReservaDate.Value.Date.Add(this.dateTimePickerReservaTime.Value.TimeOfDay),
+                                SystemLogin.GetUserLogged().Id,
+                                valorId));
 
-                        //Update no estado do veiculo reservado
-                        veiculoEscolhido = veiculos.FindVeiculo(valorId);
-                        veiculoEscolhido.EstadoVeiculo = EstadoVeiculo.Reservado;
-                        u.Saldo -= custoReserva;
+                            //Update no estado do veiculo reservado
+                            veiculoEscolhido = veiculos.FindVeiculo(valorId);
+                            veiculoEscolhido.EstadoVeiculo = EstadoVeiculo.Reservado;
+                            u.Saldo -= custoReserva;
 
-                        this.BootFormReservar();
+                            this.BootFormReservar();
+                        }
+                        catch (Exception ex)
+                        {
+                            MessageBox.Show(ex.Message, "Atenção...", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                        }
                     }
                 }
                 else

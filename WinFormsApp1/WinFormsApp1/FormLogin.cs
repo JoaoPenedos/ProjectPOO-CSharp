@@ -1,4 +1,5 @@
 ﻿using ProjectPOO.Data;
+using ProjectPOO.Exceptions;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -72,10 +73,21 @@ namespace WinFormsApp1
             if (textBoxUtilizador.Text != null && this.textBoxUtilizador.Text.Trim() != string.Empty
                 && textBoxPassword.Text != null && this.textBoxPassword.Text.Trim() != string.Empty)
             {
-                if (SystemLogin.IsAutenticacaoValida(this.textBoxUtilizador.Text.Trim(), this.textBoxPassword.Text.Trim()))
-                    this.Close();
-                else
-                    MessageBox.Show("Autenticação inválida.", "Atenção...", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                try
+                {
+                    if (SystemLogin.IsAutenticacaoValida(this.textBoxUtilizador.Text.Trim(), this.textBoxPassword.Text.Trim()))
+                        this.Close();
+                    else
+                        MessageBox.Show("Autenticação inválida.", "Atenção...", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                }
+                catch (ItemDoesNotExistsException i)
+                {
+                    MessageBox.Show(i.Source, i.Message, MessageBoxButtons.OK);
+                }
+                catch (Exception i)
+                {
+                    MessageBox.Show(i.Source, i.Message, MessageBoxButtons.OK);
+                }
             }
             else
                 MessageBox.Show("Preencha todos os campos", "Atenção...", MessageBoxButtons.OK, MessageBoxIcon.Warning);
