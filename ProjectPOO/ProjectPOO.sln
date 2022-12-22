@@ -3,7 +3,7 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.4.33122.133
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ProjectPOO.Forms", "WinFormsApp1\ProjectPOO.Forms.csproj", "{E8023D7E-C4EC-4D22-A15D-B4BF54AA5132}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ProjectPOO.Forms", "ProjectPOO.Forms\ProjectPOO.Forms.csproj", "{E8023D7E-C4EC-4D22-A15D-B4BF54AA5132}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ProjectPOO.Models", "ProjectPOO.Models\ProjectPOO.Models.csproj", "{6DA58A47-F19F-4C30-BCFF-B296922AA619}"
 EndProject

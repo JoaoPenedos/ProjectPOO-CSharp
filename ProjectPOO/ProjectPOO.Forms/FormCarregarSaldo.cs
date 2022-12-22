@@ -68,6 +68,8 @@ namespace WinFormsApp1
             Utilizador? u = utilizadores.FindUtilizadorTipoUtilizador(SystemLogin.GetUserLogged().Id);
             u.Saldo += Double.TryParse(this.textBoxSaldo.Text.Trim(), out double parsed) ? parsed : 0;
 
+            MessageBox.Show("Saldo carregado com sucesso","Sucesso",MessageBoxButtons.OK,MessageBoxIcon.Information);
+
             this.Close();
         }
 
