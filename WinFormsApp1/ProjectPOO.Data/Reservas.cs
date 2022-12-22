@@ -56,7 +56,7 @@ namespace ProjectPOO.Data
                 throw new ItemIsNullException("ProjectPOO.Data.Reservas.UpdateReserva() - reserva é null");
 
             //Verificar se a Reserva existe na lista
-            if (this.reservas.Exists(t => t.Id.Equals(reserva.Id)))
+            if (!this.reservas.Exists(t => t.Id.Equals(reserva.Id)))
                 throw new ItemDoesNotExistsException("ProjectPOO.Data.Reservas.UpdateReserva() - reserva não existe na lista");
 
             //get index da reserva 
@@ -82,7 +82,7 @@ namespace ProjectPOO.Data
                 throw new ItemIsNullException("ProjectPOO.Data.Reservas.DeleteReserva() - reserva é null");
 
             //Verificar se a Reserva existe na lista
-            if (this.reservas.Exists(t => t.Id.Equals(reserva.Id)))
+            if (!this.reservas.Exists(t => t.Id.Equals(reserva.Id)))
                 throw new ItemDoesNotExistsException("ProjectPOO.Data.Reservas.DeleteReserva() - reserva não existe na lista");
 
             //get index da reserva

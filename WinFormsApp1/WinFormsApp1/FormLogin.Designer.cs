@@ -95,7 +95,7 @@
             // 
             // buttonLoginShowPass
             // 
-            this.buttonLoginShowPass.BackgroundImage = global::WinFormsApp1.Properties.Resources.EyeIcon;
+            this.buttonLoginShowPass.BackgroundImage = global::ProjectPOO.Forms.Properties.Resources.EyeIcon;
             this.buttonLoginShowPass.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
             this.buttonLoginShowPass.Location = new System.Drawing.Point(334, 69);
             this.buttonLoginShowPass.Name = "buttonLoginShowPass";

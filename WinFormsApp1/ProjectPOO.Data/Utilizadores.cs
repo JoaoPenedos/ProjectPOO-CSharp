@@ -85,7 +85,7 @@ namespace ProjectPOO.Data
                 throw new ItemIsNullException("ProjectPOO.Data.Utilizadores.UpdateUtilizador() - utilizador é null");
 
             //Verificar se o utilizador existe na lista
-            if (Utilizadores.utilizadores.Exists(u => u.Id.Equals(utilizador.Id)))
+            if (!Utilizadores.utilizadores.Exists(u => u.Id.Equals(utilizador.Id)))
                 throw new ItemDoesNotExistsException("ProjectPOO.Data.Utilizadores.UpdateUtilizador() - utilizador não existe na lista");
 
             //get index do utilizador
@@ -111,7 +111,7 @@ namespace ProjectPOO.Data
                 throw new ItemIsNullException("ProjectPOO.Data.Utilizadores.UpdateUtilizador() - funcionario é null");
 
             //Verificar se o funcionario existe na lista
-            if (Utilizadores.utilizadores.Exists(f => f.Id.Equals(funcionario.Id)))
+            if (!Utilizadores.utilizadores.Exists(f => f.Id.Equals(funcionario.Id)))
                 throw new ItemDoesNotExistsException("ProjectPOO.Data.Utilizadores.UpdateUtilizador() - funcionario não existe na lista");
 
             //get index do funcionario
@@ -137,7 +137,7 @@ namespace ProjectPOO.Data
                 throw new ItemIsNullException("ProjectPOO.Data.Utilizadores.DeleteUtilizador() - utilizador é null");
 
             //Verificar se o Utilizador existe na lista
-            if (Utilizadores.utilizadores.Exists(t => t.Id.Equals(utilizador.Id)))
+            if (!Utilizadores.utilizadores.Exists(t => t.Id.Equals(utilizador.Id)))
                 throw new ItemDoesNotExistsException("ProjectPOO.Data.Utilizadores.DeleteUtilizador() - utilizador não existe na lista");
 
             //get index do utilizador
@@ -163,7 +163,7 @@ namespace ProjectPOO.Data
                 throw new ItemIsNullException("ProjectPOO.Data.Utilizadores.DeleteUtilizador() - funcionario é null");
 
             //Verificar se o Funcionario existe na lista
-            if (Utilizadores.utilizadores.Exists(t => t.Id.Equals(funcionario.Id)))
+            if (!Utilizadores.utilizadores.Exists(t => t.Id.Equals(funcionario.Id)))
                 throw new ItemDoesNotExistsException("ProjectPOO.Data.Utilizadores.DeleteUtilizador() - funcionario não existe na lista");
 
             //get index do funcionario

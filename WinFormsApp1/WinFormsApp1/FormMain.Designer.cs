@@ -163,7 +163,7 @@
             // 
             // pictureBoxBicicleta
             // 
-            this.pictureBoxBicicleta.Image = global::WinFormsApp1.Properties.Resources._2533224;
+            this.pictureBoxBicicleta.Image = global::ProjectPOO.Forms.Properties.Resources._2533224;
             this.pictureBoxBicicleta.Location = new System.Drawing.Point(20, 60);
             this.pictureBoxBicicleta.Name = "pictureBoxBicicleta";
             this.pictureBoxBicicleta.Size = new System.Drawing.Size(120, 118);
@@ -173,7 +173,7 @@
             // 
             // pictureBoxTrotinete
             // 
-            this.pictureBoxTrotinete.Image = global::WinFormsApp1.Properties.Resources.istockphoto_1318443231_612x612_removebg_preview;
+            this.pictureBoxTrotinete.Image = global::ProjectPOO.Forms.Properties.Resources.istockphoto_1318443231_612x612_removebg_preview;
             this.pictureBoxTrotinete.Location = new System.Drawing.Point(169, 60);
             this.pictureBoxTrotinete.Name = "pictureBoxTrotinete";
             this.pictureBoxTrotinete.Size = new System.Drawing.Size(120, 118);

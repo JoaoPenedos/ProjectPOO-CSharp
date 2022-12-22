@@ -3,7 +3,7 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.4.33122.133
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "WinFormsApp1", "WinFormsApp1\WinFormsApp1.csproj", "{E8023D7E-C4EC-4D22-A15D-B4BF54AA5132}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ProjectPOO.Forms", "WinFormsApp1\ProjectPOO.Forms.csproj", "{E8023D7E-C4EC-4D22-A15D-B4BF54AA5132}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ProjectPOO.Models", "ProjectPOO.Models\ProjectPOO.Models.csproj", "{6DA58A47-F19F-4C30-BCFF-B296922AA619}"
 EndProject
@@ -11,7 +11,7 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ProjectPOO.Enums", "Project
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ProjectPOO.Exceptions", "ProjectPOO.Exceptions\ProjectPOO.Exceptions.csproj", "{427B9EDF-DD04-42BF-8B43-843D964CDA44}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ProjectPOO.Data", "ProjectPOO.Data\ProjectPOO.Data.csproj", "{B1A3F432-BDD2-4122-A8F8-0870A9ADE2FE}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ProjectPOO.Data", "ProjectPOO.Data\ProjectPOO.Data.csproj", "{B1A3F432-BDD2-4122-A8F8-0870A9ADE2FE}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
